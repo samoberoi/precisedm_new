@@ -1,73 +1,331 @@
-# Welcome to your Lovable project
+# PreciseDM
 
-## Project info
+Lovable Prompt — Build PreciseDM Mobile App (Onboarding + Authentication)
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Build a fully functional mobile application called PreciseDM.
+This app focuses on personalized insulin dosing to optimize diabetes management.
 
-## How can I edit this code?
+The current task is to build Phase 1: Onboarding + Authentication Flow.
 
-There are several ways of editing your application.
+The app should be mobile-first, designed for iOS and Android, with clean medical-grade UI, calm colors (white / teal / soft blue), and smooth transitions.
 
-**Use Lovable**
+All screens must support future backend connectivity.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+All images, branding assets, and logo files will be provided shortly, so design the components to easily accept these assets later.
 
-Changes made via Lovable will be committed automatically to this repo.
+1. Launch Screen (Splash Screen)
 
-**Use your preferred IDE**
+When the app launches:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Display:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+PreciseDM Logo
+(Placeholder for now – to be replaced later)
 
-Follow these steps:
+Below the logo show the text:
+
+Welcome to PreciseDM
+Personalized insulin dosing to optimize diabetes management.
+
+Button:
+
+Next
+
+Interaction:
+When user taps Next → move to Screen 2
+
+2. Onboarding Screen 2
+
+Title:
+
+Empower your insulin dosing skills for confident diabetes management
+
+Description:
+
+Access four powerful tools designed for every stage of your diabetes management:
+
+• Initial dosing
+• Steroid dosing
+• Pregnancy care
+• Ongoing maintenance
+
+Button:
+
+Next
+
+Interaction:
+
+Next → Screen 3
+
+3. Onboarding Screen 3
+
+Title:
+
+Your journey begins here
+
+Description:
+
+Join us and take care of your health with ease and confidence.
+
+Primary Button:
+
+Get Started
+
+Interaction:
+
+Get Started → Go to Login Screen
+
+4. Login Screen
+
+Layout:
+
+Top section:
+PreciseDM Logo
+
+Fields:
+
+Email Address
+Password
+
+Buttons:
+
+Login
+
+Links:
+
+Forgot Password
+
+Skip (allows user to preview the app)
+
+Text below:
+
+Don't have an account? Sign Up
+
+Login Behavior
+
+Login validates:
+
+• Email format
+• Password required
+
+If valid → proceed to App Home (to be built later)
+
+If invalid → show appropriate error messages.
+
+Skip Button Behavior
+
+Skip allows users to explore the app without logging in, but they cannot access core medical tools or perform calculations.
+
+Display limited preview mode.
+
+5. Forgot Password Flow
+
+User enters email.
+
+System sends password reset email via Resend email service.
+
+Lovable should request the Resend API key during setup.
+
+Email content:
+
+Subject: Reset Your PreciseDM Password
+
+Body:
+
+Hello,
+
+We received a request to reset your password for PreciseDM.
+
+If this was you, please follow the instructions in the app to reset your password.
+
+If not, you can safely ignore this email.
+
+PreciseDM Team
+
+6. Sign Up Screen
+
+Fields:
+
+Full Name
+
+Email Address
+
+Create Password
+
+Confirm Password
+
+User Type (Dropdown)
+
+Options:
+
+• Student
+• Practitioner
+
+User ID (optional field)
+
+User may enter any identifier (example: hospital ID, student ID, etc.)
+
+Checkbox:
+
+☐ I accept the Terms and Privacy Policy
+
+Button:
+
+Sign Up
+
+Validation Rules
+
+Full name required
+
+Valid email format
+
+Password minimum 8 characters
+
+Passwords must match
+
+Terms must be accepted
+
+7. Email Confirmation After Sign Up
+
+After successful registration:
+
+Send email using Resend.
+
+Subject:
+
+Welcome to PreciseDM
+
+Body:
+
+Hello,
+
+Thank you for registering on PreciseDM.
+
+Your account has been successfully created.
+
+You can now log in to the app using your email and password.
+
+PreciseDM Team
+
+8. Post Registration Flow
+
+After successful signup:
+
+Do NOT automatically log in the user.
+
+Instead:
+
+Display success message:
+
+"Registration successful. Please log in to continue."
+
+Then redirect user to Login Screen.
+
+9. Backend Structure
+
+Create the following user database fields:
+
+User ID (auto generated)
+
+Full Name
+
+Email
+
+Password (secure hashed)
+
+User Type (Student / Practitioner)
+
+Custom User ID (optional)
+
+Accepted Terms (boolean)
+
+Created At
+
+Last Login
+
+10. Email Infrastructure
+
+Use:
+
+Resend API for sending transactional emails
+
+System must:
+
+Prompt developer for Resend API Key
+
+Create email functions for:
+
+• Welcome Email
+• Password Reset Email
+
+11. Security Requirements
+
+Passwords must be hashed and salted
+
+Email must be unique
+
+Implement basic rate limiting on login attempts
+
+Ensure secure authentication tokens
+
+12. UI / UX Requirements
+
+Clean healthcare UI
+
+Minimal design
+
+Soft medical color palette
+
+Smooth screen transitions
+
+Large readable typography
+
+Touch friendly buttons
+
+Accessible form inputs
+
+13. Code Architecture
+
+Modular architecture.
+
+Separate modules for:
+
+• Authentication
+• Email Services
+• Onboarding Screens
+• Form Validation
+
+Ensure this is scalable for future modules including insulin calculators.
+
+14. Future Modules (DO NOT BUILD YET)
+
+These will be added later:
+
+• Initial Insulin Dose Calculator
+• Steroid Dose Calculator
+• Pregnancy Diabetes Module
+• Maintenance Dose Adjustment
+• Patient Profile Tracking
+
+Just ensure authentication supports future modules.
+
+This project was built with [Lovable](https://lovable.dev).
+
+## Build with Lovable
+
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/7ff78999-af58-4443-a884-1d10f3c1d73f).
+
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+
+## Development
+
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+git clone <this-repository-url>
+cd <repository-name>
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
