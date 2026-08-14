@@ -3601,7 +3601,7 @@ export const blogPosts: BlogPost[] = [
 
       { type: "h2", text: "Automated Insulin Delivery and AID Systems" },
       { type: "p", text: "Automated insulin delivery AID systems represent an important evolution in pump therapy, using sensor glucose data to adjust insulin delivery automatically. These systems can reduce some of the manual burden, but they do not eliminate the need for clinical oversight." },
-      { type: "html", html: 'Clinicians choosing or reviewing <a href="/features">automated insulin delivery AID systems</a> should still verify that targets, modes, and override behaviours match the patient's clinical plan and local protocols.' },
+      { type: "html", html: 'Clinicians choosing or reviewing <a href="/features">automated insulin delivery AID systems</a> should still verify that targets, modes, and override behaviours match the patient\'s clinical plan and local protocols.' },
       { type: "p", text: "AID systems also introduce their own learning curve. Patients need to understand when the system will act, when it will not, and what manual actions remain their responsibility." },
 
       { type: "h2", text: "Insulin Pump Troubleshooting" },
