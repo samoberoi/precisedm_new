@@ -123,6 +123,8 @@ const BlogPostPage = () => {
         <link rel="canonical" href={canonical} />
 
         <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="PreciseDM" />
+        <meta property="og:locale" content="en_US" />
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonical} />
