@@ -2170,9 +2170,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "managing-diabetes-around-surgery",
     title: "Managing Diabetes Around Surgery: Why the Perioperative Period Is One of the Riskiest Times in Diabetes Care",
-    metaTitle: "Managing Diabetes Around Surgery | Perioperative Diabetes Management Guide",
+    metaTitle: "Diabetes Surgical Complications Risk: Perioperative Care",
     metaDescription:
-      "Learn why surgery presents unique challenges for people with diabetes. Explore perioperative diabetes management, glucose control strategies, insulin adjustments, and ways to reduce surgical complications.",
+      "Surgery sharply raises diabetes surgical complications risk. Explore perioperative glucose control, insulin adjustment before surgery and safer recovery.",
     excerpt:
       "Surgery places patients with diabetes under significant metabolic stress. Here's what changes across the preoperative, intraoperative, and postoperative phases, and how structured support keeps glucose control on track.",
     category: "Diabetes Management",
@@ -2195,6 +2195,7 @@ export const blogPosts: BlogPost[] = [
     imageAlt:
       "Surgical team in a hospital pre-operative area reviewing a patient's glucose chart on a tablet, with an insulin pen and glucose meter on the tray, illustrating perioperative diabetes management.",
     publishedAt: "2026-07-17",
+    canonicalUrl: "https://www.precisedm.com/blog/managing-diabetes-around-surgery",
     readTime: "9 min read",
     author: "PreciseDM Clinical Team",
     content: [
@@ -2272,7 +2273,7 @@ export const blogPosts: BlogPost[] = [
         ],
       },
       { type: "h2", text: "Common Surgical Complications in Diabetes" },
-      { type: "p", text: "The diabetes surgical complications risk profile is well recognised and largely driven by sustained perioperative hyperglycemia." },
+      { type: "html", html: 'The <a href="https://www.precisedm.com/features">diabetes surgical complications risk</a> profile is well recognised and largely driven by sustained perioperative hyperglycemia.' },
       {
         type: "ul",
         items: [
