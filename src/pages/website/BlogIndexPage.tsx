@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
-import { blogPosts } from "@/lib/blog-posts";
+import { getLiveBlogPosts } from "@/lib/blog-posts";
 import { SITE } from "@/lib/seo-config";
 
 const BlogIndexPage = () => {
@@ -32,7 +32,7 @@ const BlogIndexPage = () => {
 
       <section className="mx-auto max-w-5xl px-6 pb-24">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          {[...blogPosts].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)).map((post) => (
+          {[...getLiveBlogPosts()].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)).map((post) => (
             <Link
               key={post.slug}
               to={`/blog/${post.slug}`}

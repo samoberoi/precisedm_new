@@ -180,16 +180,9 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://www.precisedm.com/blog/diabetes-self-management-education-clinical-outcomes</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.precisedm.com/blog/insulin-concordance-challenges-diabetes-patients</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+  <!-- Scheduled: add on 2026-08-17 /blog/diabetes-self-management-education-clinical-outcomes -->
+  <!-- Scheduled: add on 2026-08-21 /blog/insulin-concordance-challenges-diabetes-patients -->
+
 
 
 

@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { ArrowLeft, ArrowRight, Calendar, Clock, Tag } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { getBlogPost, getPostMeta, type BlogBlock } from "@/lib/blog-posts";
+import { getBlogPost, getPostMeta, isPostLive, type BlogBlock } from "@/lib/blog-posts";
 import { SITE } from "@/lib/seo-config";
 
 const renderBlock = (block: BlogBlock, i: number) => {
@@ -83,6 +83,8 @@ const BlogPostPage = () => {
 
   if (!post) return <Navigate to="/blog" replace />;
 
+  const isLive = isPostLive(post);
+
   const meta = getPostMeta(post);
   const canonical = post.canonicalUrl || `${SITE.url}/blog/${post.slug}`;
   const ogImage = post.image.startsWith("http") ? post.image : `${SITE.url}${post.image}`;
@@ -120,7 +122,11 @@ const BlogPostPage = () => {
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />
         <meta name="keywords" content={post.keywords.join(", ")} />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+        {isLive ? (
+          <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+        ) : (
+          <meta name="robots" content="noindex, nofollow" />
+        )}
         <link rel="canonical" href={canonical} />
 
         <meta property="og:type" content="article" />
@@ -134,8 +140,10 @@ const BlogPostPage = () => {
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={ogImage} />
-        <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
-        {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
+        {isLive && <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>}
+        {isLive && faqSchema && (
+          <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        )}
       </Helmet>
 
       <article className="mx-auto max-w-3xl px-6 pt-12 pb-24 md:pt-20">

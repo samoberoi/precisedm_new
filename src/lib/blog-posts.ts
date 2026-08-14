@@ -4052,3 +4052,17 @@ export const getPostMeta = (post: BlogPost) =>
 
 export const getBlogPost = (slug: string) => blogPosts.find((p) => p.slug === slug);
 
+/**
+ * Scheduling: a post goes live at 00:00 UTC on its own `publishedAt` date.
+ * Future-dated posts stay out of the public index, are not linked, and are
+ * rendered as noindex until their scheduled date arrives.
+ */
+export const isPostLive = (post: BlogPost, now: Date = new Date()) => {
+  const today = now.toISOString().slice(0, 10);
+  return post.publishedAt <= today;
+};
+
+export const getLiveBlogPosts = (now: Date = new Date()) =>
+  blogPosts.filter((p) => isPostLive(p, now));
+
+
