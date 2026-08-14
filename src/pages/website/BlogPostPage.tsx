@@ -85,6 +85,7 @@ const BlogPostPage = () => {
 
   const meta = getPostMeta(post);
   const canonical = post.canonicalUrl || `${SITE.url}/blog/${post.slug}`;
+  const ogImage = post.image.startsWith("http") ? post.image : `${SITE.url}${post.image}`;
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -128,11 +129,11 @@ const BlogPostPage = () => {
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonical} />
-        <meta property="og:image" content={post.image} />
+        <meta property="og:image" content={ogImage} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content={post.image} />
+        <meta name="twitter:image" content={ogImage} />
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
         {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
       </Helmet>
