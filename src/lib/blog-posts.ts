@@ -24,6 +24,7 @@ import managingDiabetesAroundSurgeryImg from "@/assets/blog/managing-diabetes-ar
 import managingDiabetesDuringRamadanImg from "@/assets/blog/managing-diabetes-during-ramadan.jpg";
 import pharmacistInsulinManagementImg from "@/assets/blog/pharmacist-insulin-management.jpg";
 import insulinManagementIcuImg from "@/assets/blog/insulin-management-icu.jpg";
+import nursePractitionerInsulinDosingImg from "@/assets/blog/nurse-practitioner-insulin-dosing.jpg";
 
 import { buildDescription, buildTitle, clampDescription, clampTitle } from "@/lib/seo-meta";
 
