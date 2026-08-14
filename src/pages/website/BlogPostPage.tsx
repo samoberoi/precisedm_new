@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { ArrowLeft, ArrowRight, Calendar, Clock, Tag } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { getBlogPost, type BlogBlock } from "@/lib/blog-posts";
+import { getBlogPost, getPostMeta, type BlogBlock } from "@/lib/blog-posts";
 import { SITE } from "@/lib/seo-config";
 
 const renderBlock = (block: BlogBlock, i: number) => {
@@ -83,12 +83,13 @@ const BlogPostPage = () => {
 
   if (!post) return <Navigate to="/blog" replace />;
 
+  const meta = getPostMeta(post);
   const canonical = post.canonicalUrl || `${SITE.url}/blog/${post.slug}`;
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
-    description: post.metaDescription,
+    description: meta.description,
     image: [post.image.startsWith("http") ? post.image : `${SITE.url}${post.image}`],
     datePublished: post.publishedAt,
     author: { "@type": "Organization", name: post.author },
@@ -115,18 +116,18 @@ const BlogPostPage = () => {
   return (
     <>
       <Helmet>
-        <title>{post.metaTitle}</title>
-        <meta name="description" content={post.metaDescription} />
+        <title>{meta.title}</title>
+        <meta name="description" content={meta.description} />
         <meta name="keywords" content={post.keywords.join(", ")} />
         <link rel="canonical" href={canonical} />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content={post.metaTitle} />
-        <meta property="og:description" content={post.metaDescription} />
+        <meta property="og:title" content={meta.title} />
+        <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonical} />
         <meta property="og:image" content={post.image} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.metaTitle} />
-        <meta name="twitter:description" content={post.metaDescription} />
+        <meta name="twitter:title" content={meta.title} />
+        <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={post.image} />
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
         {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
