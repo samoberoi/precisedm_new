@@ -2348,11 +2348,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "managing-diabetes-during-ramadan",
     title: "Managing Diabetes During Ramadan: What Healthcare Providers Need to Know",
-    metaTitle: "Managing Diabetes During Ramadan | Healthcare Provider Guide | PreciseDM",
-    metaDescription:
-      "Learn best practices for diabetes management during Ramadan fasting, including pre-Ramadan assessment, insulin dose adjustments, glucose monitoring, and risk stratification for safer fasting.",
+    metaTitle: "Diabetes Management During Ramadan Fasting: Provider Guide",
     excerpt:
-      "Prolonged daily fasting reshapes meal timing, medication schedules, and hypoglycemia risk. Here's how providers can prepare patients well before Ramadan begins.",
+      "Fasting reshapes meal timing, medication schedules and hypoglycemia risk in diabetes. How providers can plan Ramadan care weeks before the month begins.",
     category: "Diabetes Management",
     tags: [
       "diabetes management during Ramadan fasting",
@@ -2373,6 +2371,7 @@ export const blogPosts: BlogPost[] = [
     imageAlt:
       "Physician counselling a patient during a pre-Ramadan diabetes consultation in a modern clinic, with a glucose monitor and dates on the desk in warm evening light.",
     publishedAt: "2026-07-20",
+    canonicalUrl: "https://www.precisedm.com/blog/managing-diabetes-during-ramadan",
     readTime: "9 min read",
     author: "PreciseDM Clinical Team",
     content: [
@@ -2403,7 +2402,7 @@ export const blogPosts: BlogPost[] = [
       },
       { type: "p", text: "Type 1 diabetes does not automatically preclude fasting, but it demands intensive monitoring, CGM where available, and a clear plan for breaking the fast. Pregnancy, elderly patients with frailty or hypoglycemia unawareness, children, and patients with advanced complications all warrant particularly careful assessment, and in many cases a clear recommendation against fasting." },
       { type: "h2", text: "Importance of Pre-Ramadan Diabetes Assessment" },
-      { type: "p", text: "A pre-Ramadan diabetes assessment ideally takes place six to eight weeks before the month begins, allowing time to adjust therapy and reinforce education." },
+      { type: "html", html: 'A <a href="https://www.precisedm.com/features">pre-Ramadan diabetes assessment</a> ideally takes place six to eight weeks before the month begins, allowing time to adjust therapy and reinforce education.' },
       {
         type: "ul",
         items: [
