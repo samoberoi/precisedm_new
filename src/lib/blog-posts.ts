@@ -25,6 +25,8 @@ import managingDiabetesDuringRamadanImg from "@/assets/blog/managing-diabetes-du
 import pharmacistInsulinManagementImg from "@/assets/blog/pharmacist-insulin-management.jpg";
 import insulinManagementIcuImg from "@/assets/blog/insulin-management-icu.jpg";
 
+import { buildDescription, buildTitle, clampDescription, clampTitle } from "@/lib/seo-meta";
+
 export interface BlogFaq {
   q: string;
   a: string;
@@ -33,8 +35,10 @@ export interface BlogFaq {
 export interface BlogPost {
   slug: string;
   title: string;
-  metaTitle: string;
-  metaDescription: string;
+  /** Optional override. When omitted it is generated from `title`. */
+  metaTitle?: string;
+  /** Optional override. When omitted it is generated from `excerpt` / content. */
+  metaDescription?: string;
   excerpt: string;
   category: string;
   tags: string[];
@@ -2873,6 +2877,50 @@ export const blogPosts: BlogPost[] = [
     ],
   },
 ];
+
+// ---------- Automatic, unique meta generation ----------
+// Every post gets a length-safe (<60 / <160) title + description derived from
+// its own title, excerpt and body. Manual overrides are respected but still
+// normalized, and collisions across posts are resolved automatically.
+
+const firstParagraph = (post: BlogPost): string => {
+  const block = post.content.find((b) => b.type === "p" || b.type === "html");
+  if (!block) return "";
+  return block.type === "p" ? block.text : block.type === "html" ? block.html : "";
+};
+
+const metaCache: Record<string, { title: string; description: string }> = (() => {
+  const out: Record<string, { title: string; description: string }> = {};
+  const usedTitles = new Set<string>();
+  const usedDescriptions = new Set<string>();
+
+  for (const post of blogPosts) {
+    let title = post.metaTitle ? clampTitle(post.metaTitle) : buildTitle(post.title);
+    if (usedTitles.has(title.toLowerCase())) {
+      title = clampTitle(`${title} | ${post.category}`);
+      let n = 2;
+      while (usedTitles.has(title.toLowerCase())) title = clampTitle(`${title} ${n++}`);
+    }
+    usedTitles.add(title.toLowerCase());
+
+    let description = post.metaDescription
+      ? clampDescription(post.metaDescription)
+      : buildDescription(post.excerpt, firstParagraph(post), post.title);
+    if (usedDescriptions.has(description.toLowerCase())) {
+      description = buildDescription(firstParagraph(post), post.excerpt);
+    }
+    usedDescriptions.add(description.toLowerCase());
+
+    out[post.slug] = { title, description };
+  }
+  return out;
+})();
+
+export const getPostMeta = (post: BlogPost) =>
+  metaCache[post.slug] || {
+    title: buildTitle(post.title),
+    description: buildDescription(post.excerpt, firstParagraph(post)),
+  };
 
 export const getBlogPost = (slug: string) => blogPosts.find((p) => p.slug === slug);
 
