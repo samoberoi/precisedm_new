@@ -3052,7 +3052,7 @@ export const blogPosts: BlogPost[] = [
       "Diabetes and Obesity: Why Standard Insulin Dosing Approaches Frequently Fall Short",
     metaTitle: "Diabetes Obesity Insulin Dosing Challenges Explained",
     excerpt:
-      "Obesity reshapes insulin requirements in ways simple formulas rarely capture. A practical look at the dosing challenges and the assessment that supports safer decisions.",
+      "Obesity reshapes insulin requirements in ways simple formulas rarely capture. A practical look at the dosing challenges and safer assessment.",
     category: "Clinical Practice",
     tags: [
       "diabetes obesity insulin dosing challenges",
