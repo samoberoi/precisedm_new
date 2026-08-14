@@ -27,6 +27,7 @@ import insulinManagementIcuImg from "@/assets/blog/insulin-management-icu.jpg";
 import nursePractitionerInsulinDosingImg from "@/assets/blog/nurse-practitioner-insulin-dosing.jpg";
 import diabetesObesityInsulinDosingImg from "@/assets/blog/diabetes-obesity-insulin-dosing.jpg";
 import clinicalBurnoutDiabetesCareImg from "@/assets/blog/clinical-burnout-diabetes-care.jpg";
+import diabetesChemotherapyInsulinDosingImg from "@/assets/blog/diabetes-chemotherapy-insulin-dosing.jpg.asset.json";
 
 import { buildDescription, buildTitle, clampDescription, clampTitle } from "@/lib/seo-meta";
 
@@ -3344,7 +3345,180 @@ export const blogPosts: BlogPost[] = [
       { q: "Does structured support replace clinical judgement?", a: "No. Responsibility for assessment, interpretation, and the final decision stays with the clinician, working within professional scope of practice, local prescribing policy, and organisational governance arrangements." },
     ],
   },
+  {
+    slug: "insulin-dosing-patients-on-chemotherapy-diabetes",
+    title:
+      "Managing Diabetes in Patients on Chemotherapy: A Clinical Challenge That Belongs to Everyone",
+    metaTitle: "Insulin Dosing in Patients on Chemotherapy",
+    metaDescription:
+      "Chemotherapy changes glucose control in ways that touch oncology, primary care, and diabetes teams. A practical look at insulin dosing in patients on cancer treatment.",
+    excerpt:
+      "Chemotherapy can reshape glucose control through steroids, stress, altered intake, and the cancer itself. Insulin dosing in these patients requires coordination across oncology and diabetes care teams.",
+    category: "Clinical Practice",
+    tags: [
+      "insulin dosing patients on chemotherapy diabetes",
+      "chemotherapy steroid hyperglycemia management",
+      "dexamethasone glucose control cancer patients",
+      "diabetes cancer treatment complications",
+      "oncology insulin dose adjustment",
+    ],
+    keywords: [
+      "insulin dosing patients on chemotherapy diabetes",
+      "chemotherapy steroid hyperglycemia management",
+      "dexamethasone glucose control cancer patients",
+      "diabetes cancer treatment complications",
+      "oncology insulin dose adjustment",
+      "structured insulin support oncology settings",
+    ],
+    image: diabetesChemotherapyInsulinDosingImg.url,
+    imageAlt:
+      "Female clinician in a white coat reviews a glucose trend chart on a tablet with a male patient receiving chemotherapy in an oncology infusion center, with insulin pens and a glucose meter on the table.",
+    publishedAt: "2026-08-10",
+    readTime: "9 min read",
+    author: "PreciseDM Clinical Team",
+    canonicalUrl:
+      "https://www.precisedm.com/blog/insulin-dosing-patients-on-chemotherapy-diabetes",
+    content: [
+      { type: "p", text: "Cancer treatment and diabetes rarely stay in separate lanes. A patient beginning chemotherapy may already have type 1 or type 2 diabetes, or may develop glucose elevations for the first time during treatment. Insulin dosing patients on chemotherapy diabetes therefore becomes a shared problem, not a specialist-only one." },
+      { type: "p", text: "This article is for the clinician in any setting who sees these patients: oncology nurses, primary care providers, hospitalists, pharmacists, and diabetes specialists. It covers why glucose control becomes complicated during chemotherapy, what patterns to expect, and how teams can coordinate care without overstepping scope or inventing universal rules." },
+
+      { type: "h2", text: "Why Chemotherapy Disrupts Glucose Control" },
+      { type: "p", text: "Diabetes management during chemotherapy is challenging because the treatment environment introduces several glucose-raising factors at once. Some are direct effects of therapy; others come from the surrounding care." },
+      {
+        type: "ul",
+        items: [
+          "Corticosteroids such as dexamethasone are commonly used as antiemetics or part of chemotherapy premedication.",
+          "Reduced oral intake, nausea, and altered absorption change carbohydrate exposure unpredictably.",
+          "Infection risk, stress hormones, and interrupted sleep raise counter-regulatory signals.",
+          "Renal function, hepatic function, and weight may fluctuate, altering insulin clearance and sensitivity.",
+          "The cancer itself can drive catabolism and insulin resistance in some presentations.",
+        ],
+      },
+      { type: "p", text: "None of these operate in isolation. A single dexamethasone dose can raise glucose for hours to days, while the same patient may have poor oral intake the following day. That variability is the central clinical problem." },
+
+      { type: "h2", text: "Steroid-Associated Hyperglycemia in Oncology" },
+      { type: "p", text: "Chemotherapy steroid hyperglycemia management is one of the most common reasons diabetes teams are consulted during cancer care. Dexamethasone and similar agents increase hepatic glucose output and induce peripheral insulin resistance. The effect is dose- and schedule-dependent." },
+      { type: "p", text: "Dexamethasone glucose control cancer patients need often follows a predictable timing pattern: glucose rises after administration, peaks later the same day or the next, and may fall as the steroid effect wanes. Matching insulin action to that curve requires more than a single basal adjustment." },
+      {
+        type: "ul",
+        items: [
+          "Short-term or single-dose steroid exposure may need only short-acting insulin coverage.",
+          "Repeated dosing, especially on consecutive days, can produce a sustained hyperglycemic effect.",
+          "Dose timing matters: morning versus afternoon steroid administration shifts when insulin is most needed.",
+          "Steroid tapering must be matched by insulin reduction to avoid hypoglycemia.",
+        ],
+      },
+
+      { type: "h2", text: "Insulin Dosing Challenges During Cancer Treatment" },
+      { type: "p", text: "Challenges with insulin dosing in patients receiving cancer treatment extend beyond the steroid issue. The patient's usual regimen may no longer fit a body that is changing week to week." },
+      {
+        type: "ul",
+        items: [
+          "Weight loss or gain during treatment changes total daily insulin requirements.",
+          "Nausea and vomiting make prandial insulin timing difficult.",
+          "Fasting for scans, procedures, or surgery interrupts basal-bolus routines.",
+          "Oral diabetes medications may be held due to renal impairment, interactions, or poor tolerance.",
+          "Patients may be reluctant to inject insulin during an already burdensome treatment course.",
+        ],
+      },
+      { type: "p", text: "These factors do not mean insulin is inappropriate. They mean dosing must be reassessed frequently, with smaller adjustments and closer follow-up than in a stable outpatient." },
+
+      { type: "h2", text: "Oncology Insulin Dose Adjustment Principles" },
+      { type: "p", text: "Oncology insulin dose adjustment does not require a separate algorithm from general diabetes care, but it does require disciplined reassessment. The same principles apply: match insulin to carbohydrate intake, correct hyperglycemia safely, and avoid hypoglycemia." },
+      {
+        type: "ul",
+        items: [
+          "Start conservatively when insulin requirements are uncertain.",
+          "Use rapid-acting insulin to cover steroid-related glucose spikes rather than large basal increases alone.",
+          "Reassess within 24-72 hours of chemotherapy or steroid dosing when possible.",
+          "Reduce prandial or correction insulin when oral intake is poor.",
+          "Document the steroid schedule so the next clinician can anticipate the glucose curve.",
+        ],
+      },
+      { type: "p", text: "Individualized clinical assessment remains essential. Two patients on the same chemotherapy regimen can have very different glucose responses depending on their baseline diabetes control, body composition, renal function, and concurrent medications." },
+
+      { type: "h2", text: "Diabetes and Cancer Treatment Complications" },
+      { type: "p", text: "Diabetes cancer treatment complications include both short-term safety concerns and longer-term care-quality issues. In the short term, persistent hyperglycemia can worsen infection risk, delay wound healing, and increase symptoms such as thirst, polyuria, and fatigue. Hypoglycemia, often from overcorrection or missed meals, can lead to falls and emergency visits." },
+      { type: "p", text: "Over the course of treatment, poorly controlled glucose may complicate recovery from surgery, affect tolerance of therapy, and add avoidable hospital days. These are system-level concerns as much as clinical ones, because they require coordination between oncology, diabetes, pharmacy, and nursing teams." },
+
+      { type: "h2", text: "Coordination Between Diabetes and Oncology Care Teams" },
+      { type: "p", text: "No single clinician can manage every aspect of cancer-related glucose dysregulation. Coordination is not optional. Clear communication prevents conflicting advice, missed follow-up, and patient confusion." },
+      {
+        type: "ul",
+        items: [
+          "Oncology teams should flag expected steroid use and schedule changes to diabetes colleagues.",
+          "Diabetes teams should communicate insulin plans in language that fits the oncology workflow.",
+          "Primary care providers can anchor longitudinal glucose goals and medication reconciliation.",
+          "Pharmacists can screen for drug interactions and support steroid-induced hyperglycemia protocols.",
+          "Nursing staff often observe early signs of hypo- or hyperglycemia during infusion visits.",
+        ],
+      },
+      { type: "p", text: "A shared record or concise handover note that includes the current insulin regimen, steroid schedule, and review date reduces the chance that the next provider has to reconstruct the plan from scratch." },
+
+      { type: "h2", text: "Glucose Monitoring and Ongoing Reassessment" },
+      { type: "p", text: "Glucose monitoring during chemotherapy should match the risk and the treatment intensity. A patient receiving high-dose steroids with poorly controlled baseline diabetes needs a different monitoring cadence than someone with stable type 2 diabetes on a low-intensity regimen." },
+      {
+        type: "ul",
+        items: [
+          "Increase monitoring around steroid administration and for 24-48 hours afterward.",
+          "Use continuous glucose monitoring when available and appropriate for the patient's regimen.",
+          "Adjust targets realistically: some hyperglycemia may be acceptable if hypoglycemia risk is high.",
+          "Review trends, not single readings, before making dose changes.",
+          "Reassess after each chemotherapy cycle or any change in steroid dose.",
+        ],
+      },
+
+      { type: "h2", text: "Documentation and Communication Between Clinical Teams" },
+      { type: "p", text: "Good documentation in oncology diabetes care serves the same purpose it does everywhere: it transfers clinical reasoning from one visit to the next. In these patients, it is especially valuable because the plan changes frequently." },
+      {
+        type: "ul",
+        items: [
+          "Record the current insulin regimen and any recent changes with the reason for the change.",
+          "Document the chemotherapy cycle, steroid dose, and timing.",
+          "Note glucose targets agreed for this phase of treatment.",
+          "List triggers for escalation or specialist referral.",
+          "Include patient preferences, concerns, and barriers to adherence.",
+        ],
+      },
+
+      { type: "h2", text: "Appropriate Escalation and Specialist Involvement" },
+      { type: "p", text: "Not every clinician needs to manage complex oncology-related diabetes alone. Escalation is appropriate when glucose remains markedly elevated despite conservative measures, when hypoglycemia is recurrent, when renal or hepatic function changes significantly, or when the patient is transitioning between care settings." },
+      { type: "p", text: "Specialist involvement may include endocrinology, diabetes education, nutrition support, or palliative care depending on the goals of treatment. The decision to escalate should be guided by local pathways and the patient's overall clinical picture." },
+
+      { type: "h2", text: "Structured Insulin Support in Oncology Settings" },
+      { type: "html", html: 'Structured tools can help by applying consistent, protocol-aware logic to the repetitive parts of dosing decisions, freeing clinical attention for patient-specific judgement. Used well, <a href="/features">structured insulin support oncology settings</a> already rely on can become more consistent without adding unnecessary steps to busy workflows.' },
+      { type: "p", text: "The value of a decision-support tool in this context is transparency. It should show the inputs it used, the assumptions it made, and when the case falls outside its scope. That allows the clinician to accept, modify, or reject the suggestion based on the full clinical picture." },
+      {
+        type: "ul",
+        items: [
+          "Support should align with local oncology and diabetes protocols.",
+          "Inputs and outputs must be reviewable by any team member.",
+          "Escalation criteria should be visible and easy to act on.",
+          "The tool should fit into existing workflows rather than creating a parallel process.",
+        ],
+      },
+
+      { type: "h2", text: "Individualized Clinical Assessment Remains Central" },
+      { type: "p", text: "No article, protocol, or tool can replace the judgement of a clinician who knows the patient. Cancer treatment introduces rapid change, and the safest insulin plan is one that is reassessed often, communicated clearly, and adjusted to the patient's current state and goals." },
+      { type: "p", text: "Insulin dosing patients on chemotherapy diabetes is a team sport. The challenge belongs to everyone who touches the patient's care, and the solution is better coordination, not a one-size-fits-all formula." },
+
+      {
+        type: "callout",
+        text: "See how PreciseDM supports structured insulin decisions across clinical settings",
+        href: "/features",
+      },
+    ],
+    faqs: [
+      { q: "Why does chemotherapy affect blood glucose?", a: "Chemotherapy can affect glucose through several mechanisms: corticosteroids used as premedication raise glucose, stress and altered intake change insulin needs, and changes in renal or hepatic function affect insulin clearance. The effect varies by patient and regimen." },
+      { q: "How does dexamethasone affect glucose control in cancer patients?", a: "Dexamethasone increases hepatic glucose production and causes insulin resistance. It typically raises glucose hours after administration, with the effect lasting up to a day or more depending on dose and schedule." },
+      { q: "Should insulin be adjusted for every chemotherapy cycle?", a: "Insulin needs should be reassessed around each cycle, especially when steroid timing or dose changes. Monitoring glucose closely after chemotherapy allows safer, more timely adjustments." },
+      { q: "What is the role of structured insulin support in oncology settings?", a: "Structured support applies consistent, protocol-aware logic to dosing decisions, helping teams maintain consistency while preserving room for clinical judgement. It is a tool, not a replacement for individualized assessment." },
+      { q: "When should oncology-related diabetes be escalated to a specialist?", a: "Escalation is reasonable when glucose remains poorly controlled despite conservative measures, hypoglycemia is recurrent, organ function changes significantly, or the patient is moving between care settings and continuity is at risk." },
+      { q: "Does this article provide individualized insulin dosing advice?", a: "No. This article offers general educational information for healthcare professionals. All insulin dosing decisions must be made by a qualified clinician based on the individual patient, local protocols, and professional scope of practice." },
+    ],
+  },
 ];
+
 
 // ---------- Automatic, unique meta generation ----------
 // Every post gets a length-safe (<60 / <160) title + description derived from
