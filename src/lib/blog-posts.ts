@@ -27,6 +27,7 @@ import insulinManagementIcuImg from "@/assets/blog/insulin-management-icu.jpg";
 import nursePractitionerInsulinDosingImg from "@/assets/blog/nurse-practitioner-insulin-dosing.jpg";
 import diabetesObesityInsulinDosingImg from "@/assets/blog/diabetes-obesity-insulin-dosing.jpg";
 import clinicalBurnoutDiabetesCareImg from "@/assets/blog/clinical-burnout-diabetes-care.jpg";
+import diabetesChemotherapyInsulinDosingImg from "@/assets/blog/diabetes-chemotherapy-insulin-dosing.jpg.asset.json";
 
 import { buildDescription, buildTitle, clampDescription, clampTitle } from "@/lib/seo-meta";
 
