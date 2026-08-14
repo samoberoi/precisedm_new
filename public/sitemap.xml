@@ -155,6 +155,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.precisedm.com/blog/nurse-practitioner-insulin-dosing-diabetes-challenges</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 
   <url>
     <loc>https://www.precisedm.com/diaform-tool</loc>
