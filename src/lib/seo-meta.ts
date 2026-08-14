@@ -23,8 +23,9 @@ export const clampTitle = (raw: string): string => {
   // 1. Drop trailing separator segments (usually brand / secondary phrases).
   const segments = t.split(/\s[|—–]\s/);
   while (segments.length > 1 && segments.join(" | ").length >= MAX_TITLE) segments.pop();
-  t = segments.join(" | ");
-  if (t.length < MAX_TITLE) return t;
+  const joined = segments.join(" | ");
+  // Only accept the trimmed version if it still says something meaningful.
+  if (joined.length >= 20 && joined.length < MAX_TITLE) return joined;
 
   // 2. Prefer the part before a colon if it is meaningful on its own.
   const colon = t.indexOf(":");

@@ -1,3 +1,5 @@
+import { buildDescription, buildTitle } from "@/lib/seo-meta";
+
 // Central SEO / AEO / GEO configuration for PreciseDM
 // Single source of truth used by both <Seo /> components and the reporting dashboard.
 
@@ -173,9 +175,9 @@ const baseKw = ["insulin dosing calculator", "diabetes management", "PreciseDM"]
 export const PAGES: PageSeo[] = [
   {
     path: "/",
-    title: "PreciseDM — Precision Insulin Dosing Calculators for Healthcare Providers",
+    title: "Insulin Dosing Calculators for Clinicians | PreciseDM",
     description:
-      "Four evidence-based insulin dosing calculators—DiaForm, Maintenance, Steroid and Gestation—for physicians, pharmacists and nurse practitioners. Free 7-day trial.",
+      "Four evidence-based insulin dosing calculators for physicians, pharmacists and nurse practitioners in the US. Start a free 7-day trial.",
     keywords: [
       ...baseKw,
       "starting insulin dose calculator",
@@ -206,7 +208,7 @@ export const PAGES: PageSeo[] = [
   },
   {
     path: "/pricing",
-    title: "Pricing — PreciseDM | $10/mo or $72/yr with 7-Day Free Trial",
+    title: "PreciseDM Pricing — $10/mo or $72/yr, Free Trial",
     description:
       "Simple pricing for PreciseDM: 7-day free trial, then $10/month or $72/year. Cancel anytime via PayPal. Designed for healthcare providers.",
     keywords: [
@@ -319,7 +321,7 @@ export const PAGES: PageSeo[] = [
   },
   {
     path: "/steroid-tool",
-    title: "Steroid-Induced Hyperglycemia Insulin Calculator | PreciseDM",
+    title: "Steroid Insulin Dosing Calculator | PreciseDM",
     description:
       "The Steroid calculator suggests insulin dose adjustments for patients on prednisone, dexamethasone and other corticosteroids, factoring eGFR and weight.",
     keywords: [
@@ -381,5 +383,35 @@ export const PAGES: PageSeo[] = [
   },
 ];
 
+// Auto-generate SEO for any route that has no explicit entry, so new pages
+// always ship with their own unique, length-safe title and description.
+const titleCase = (slug: string) =>
+  slug
+    .split("-")
+    .filter(Boolean)
+    .map((w) => (w.length > 3 ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(" ")
+    .replace(/^./, (c) => c.toUpperCase());
+
+export const generatePageSeo = (path: string, headline?: string, content?: string): PageSeo => {
+  const slug = path.replace(/^\//, "").split("/").pop() || "home";
+  const name = headline || titleCase(slug);
+  return {
+    path,
+    title: buildTitle(name),
+    description: buildDescription(
+      content,
+      `${name} — insulin dosing decision support from ${SITE.name} for healthcare providers in the United States.`
+    ),
+    keywords: [...baseKw, name.toLowerCase()],
+    schemas: ["MedicalWebPage", "BreadcrumbList"],
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: name, path }],
+  };
+};
+
 export const getPageSeo = (path: string): PageSeo | undefined =>
   PAGES.find((p) => p.path === path);
+
+/** Always returns SEO metadata — generated from the path/content when undefined. */
+export const resolvePageSeo = (path: string, headline?: string, content?: string): PageSeo =>
+  getPageSeo(path) || generatePageSeo(path, headline, content);

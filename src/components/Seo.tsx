@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { SITE, type PageSeo, type FaqItem } from "@/lib/seo-config";
+import { clampDescription, clampTitle } from "@/lib/seo-meta";
 
 type SchemaName = PageSeo["schemas"][number];
 
@@ -120,6 +121,8 @@ interface SeoProps {
 
 const Seo = ({ page }: SeoProps) => {
   const canonical = `${SITE.url}${page.path === "/" ? "" : page.path}`;
+  const title = clampTitle(page.title);
+  const description = clampDescription(page.description);
   const ogImage = page.ogImage || `${SITE.url}/favicon.png`;
   const schemas = page.schemas
     .map((s) => buildSchema(s, page, canonical))
@@ -127,8 +130,8 @@ const Seo = ({ page }: SeoProps) => {
 
   return (
     <Helmet>
-      <title>{page.title}</title>
-      <meta name="description" content={page.description} />
+      <title>{title}</title>
+      <meta name="description" content={description} />
       <meta name="keywords" content={page.keywords.join(", ")} />
       {page.noindex ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />}
       <link rel="canonical" href={canonical} />
@@ -136,8 +139,8 @@ const Seo = ({ page }: SeoProps) => {
       {/* Open Graph */}
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={SITE.name} />
-      <meta property="og:title" content={page.title} />
-      <meta property="og:description" content={page.description} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:locale" content={SITE.locale} />
       <meta property="og:image" content={ogImage} />
@@ -145,8 +148,8 @@ const Seo = ({ page }: SeoProps) => {
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={SITE.twitter} />
-      <meta name="twitter:title" content={page.title} />
-      <meta name="twitter:description" content={page.description} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
 
       {schemas.map((s, i) => (
