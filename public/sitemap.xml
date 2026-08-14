@@ -160,6 +160,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.precisedm.com/blog/diabetes-obesity-insulin-dosing-challenges</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
 
   <url>

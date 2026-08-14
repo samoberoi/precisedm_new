@@ -25,6 +25,7 @@ import managingDiabetesDuringRamadanImg from "@/assets/blog/managing-diabetes-du
 import pharmacistInsulinManagementImg from "@/assets/blog/pharmacist-insulin-management.jpg";
 import insulinManagementIcuImg from "@/assets/blog/insulin-management-icu.jpg";
 import nursePractitionerInsulinDosingImg from "@/assets/blog/nurse-practitioner-insulin-dosing.jpg";
+import diabetesObesityInsulinDosingImg from "@/assets/blog/diabetes-obesity-insulin-dosing.jpg";
 
 import { buildDescription, buildTitle, clampDescription, clampTitle } from "@/lib/seo-meta";
 
@@ -3043,6 +3044,154 @@ export const blogPosts: BlogPost[] = [
       { q: "When should insulin management be escalated or referred?", a: "Escalate for recurrent or severe hypoglycemia, persistent hyperglycemia despite appropriate titration, suspected type 1 or ketosis-prone diabetes, pregnancy or pre-conception planning, significant renal or hepatic impairment, and any regimen outside the local pathway." },
       { q: "Do decision-support tools replace clinical judgement?", a: "No. A decision-support tool organises inputs and applies consistent logic, but the clinician remains responsible for assessment, interpretation, and the final decision. Tools should make their reasoning visible so it can be interrogated rather than accepted uncritically." },
       { q: "How does structured support help advanced practice nurses?", a: "It reduces cognitive load and variability by handling the sequence of checks and calculations consistently, which frees attention for the patient-specific judgement that genuinely requires it — and produces documentation that other members of the care team can follow." },
+    ],
+  },
+  {
+    slug: "diabetes-obesity-insulin-dosing-challenges",
+    title:
+      "Diabetes and Obesity: Why Standard Insulin Dosing Approaches Frequently Fall Short",
+    metaTitle: "Diabetes Obesity Insulin Dosing Challenges Explained",
+    excerpt:
+      "Obesity reshapes insulin requirements in ways simple formulas rarely capture. A practical look at the dosing challenges and safer assessment.",
+    category: "Clinical Practice",
+    tags: [
+      "diabetes obesity insulin dosing challenges",
+      "weight-based insulin dosing",
+      "insulin resistance obesity",
+      "individualised insulin requirements",
+      "clinical decision support diabetes",
+    ],
+    keywords: [
+      "diabetes obesity insulin dosing challenges",
+      "weight-based insulin dosing",
+      "insulin resistance and obesity",
+      "insulin requirements in obesity",
+      "structured insulin dosing assessment",
+      "clinical decision support diabetes",
+    ],
+    image: diabetesObesityInsulinDosingImg,
+    imageAlt:
+      "Clinician in a white coat reviewing glucose trend charts on a tablet with a patient in a clinic, insulin pens and a glucose meter on the desk.",
+    publishedAt: "2026-08-03",
+    readTime: "9 min read",
+    author: "PreciseDM Clinical Team",
+    canonicalUrl:
+      "https://www.precisedm.com/blog/diabetes-obesity-insulin-dosing-challenges",
+    content: [
+      { type: "p", text: "Obesity and type 2 diabetes frequently coexist, and their combination reshapes how insulin behaves in the body. The diabetes obesity insulin dosing challenges clinicians encounter are rarely a matter of arithmetic. They arise because the assumptions built into simple dosing rules — a predictable relationship between body size and insulin requirement — hold less reliably as adiposity, insulin resistance, and comorbidity increase." },
+      { type: "p", text: "This article examines where standard approaches lose accuracy, what should inform assessment instead, and how structured review supports safer, more consistent decisions within existing protocols and scope of practice." },
+
+      { type: "h2", text: "The Relationship Between Diabetes and Obesity" },
+      { type: "p", text: "Excess adiposity is closely associated with reduced insulin sensitivity. As sensitivity falls, higher circulating insulin concentrations are needed to achieve the same glucose-lowering effect, and endogenous secretion may eventually be unable to compensate. That physiology explains why two patients with similar glucose profiles can require substantially different insulin doses." },
+      {
+        type: "ul",
+        items: [
+          "Insulin resistance varies widely between individuals with a similar body mass index.",
+          "Fat distribution, muscle mass, and body composition differ even at identical total weight.",
+          "Hepatic and peripheral insulin resistance may not track together in the same patient.",
+          "Concurrent conditions and medications — including corticosteroids — can shift requirements further.",
+        ],
+      },
+
+      { type: "h2", text: "Why Insulin Dosing Becomes More Complex" },
+      { type: "p", text: "In patients with obesity, total daily insulin requirements are often higher, but the increase is not proportional in a way that can be assumed in advance. Larger doses also introduce practical considerations: injection volume, absorption variability from subcutaneous depots, the number of injections a patient is asked to tolerate, and the wider consequences of an overestimate." },
+      { type: "p", text: "Higher doses do not simply scale the risk profile; they change it. The same percentage error produces a larger absolute discrepancy in units, so a dosing decision that is directionally reasonable can still overshoot meaningfully." },
+
+      { type: "h2", text: "Limitations of Simplistic Dosing Assumptions" },
+      {
+        type: "ul",
+        items: [
+          "A single units-per-kilogram figure treats a heterogeneous population as if it were uniform.",
+          "Total body weight includes tissue that contributes little to insulin requirement.",
+          "Formulas derived in one population may not transfer to patients with different body composition or comorbidity.",
+          "Static calculations cannot account for weight change, altered renal function, or new medication.",
+          "A starting estimate is sometimes carried forward as though it were a validated maintenance dose.",
+        ],
+      },
+      { type: "p", text: "None of this makes calculation unhelpful. It makes the calculated figure a starting point that requires interpretation, not a conclusion." },
+
+      { type: "h2", text: "Weight-Based Dosing Considerations" },
+      { type: "html", html: 'Where local protocols use <a href="/features">weight-based insulin dosing</a> as an initial estimate, the value of the approach depends on how the output is treated. Used as an anchor that is then adjusted for renal function, hypoglycemia history, current regimen, and observed glucose response, it provides a defensible and reproducible starting position. Used as a fixed answer, it can carry an assumption forward that the patient never fitted.' },
+      {
+        type: "ul",
+        items: [
+          "Confirm which weight the local protocol specifies and apply it consistently.",
+          "Consider whether recent weight change reflects fluid, muscle, or adipose tissue.",
+          "Review renal and hepatic function, which alter insulin clearance independently of weight.",
+          "Distribute basal and prandial components according to the observed glucose pattern rather than a default split.",
+          "Reassess the estimate as soon as real glucose response data becomes available.",
+        ],
+      },
+
+      { type: "h2", text: "Insulin Requirements and Individual Variability" },
+      { type: "p", text: "Insulin requirement is a moving quantity. Physical activity, nutrition, intercurrent illness, sleep, corticosteroid or antipsychotic therapy, pregnancy, and weight change all shift it. Therapies associated with weight loss can reduce requirements over time, sometimes appreciably, which makes scheduled reassessment part of safe management rather than an optional extra." },
+
+      { type: "h2", text: "The Importance of Clinical Assessment" },
+      { type: "p", text: "Assessment is what turns a number into a decision. It establishes whether the glucose pattern reflects the regimen, the patient's circumstances, or something else entirely — and whether a dose change is the appropriate response at all." },
+      {
+        type: "ul",
+        items: [
+          "Clarify the current regimen as actually taken, not as prescribed.",
+          "Ask directly about hypoglycemia, including nocturnal symptoms and awareness.",
+          "Review the pattern across days rather than reacting to isolated readings.",
+          "Consider injection technique, site rotation, and lipohypertrophy, which affect absorption.",
+          "Account for nutrition, activity, and any recent change in medication or health status.",
+        ],
+      },
+
+      { type: "h2", text: "Glucose Monitoring and Ongoing Review" },
+      { type: "p", text: "Monitoring provides the feedback that any dosing approach depends on. Whether from capillary testing or continuous glucose monitoring, the useful signal is the pattern: when values are out of range, how consistently, and in relation to what. A defined review interval, agreed before the change is made, keeps the loop closed." },
+
+      { type: "h2", text: "Adjusting Treatment in Clinical Context" },
+      { type: "p", text: "Adjustment should be proportionate to the confidence available. Where data is limited or the picture is unclear, a smaller, reversible change with earlier review is generally more defensible than a large speculative one. Where the pattern is consistent and well documented, a more decisive change may be appropriate. Both decisions should follow the local pathway." },
+
+      { type: "h2", text: "Safety Considerations" },
+      {
+        type: "ul",
+        items: [
+          "Hypoglycemia risk rises with regimen complexity, missed meals, renal impairment, and impaired awareness.",
+          "Large single doses may be better tolerated and more predictably absorbed when split, where the protocol allows.",
+          "Concentrated insulin formulations require explicit unit and device clarity to avoid administration error.",
+          "Sick-day rules, driving guidance, and safety-netting instructions should be discussed and recorded.",
+        ],
+      },
+
+      { type: "h2", text: "Documentation and Monitoring" },
+      { type: "p", text: "Recording the reasoning behind a dose — the data considered, the rationale, and the planned review point — allows the next clinician to continue the same logic rather than restart it. In shared care, that continuity is often what prevents avoidable variation between reviews." },
+
+      { type: "h2", text: "When Specialist Input May Be Appropriate" },
+      {
+        type: "ul",
+        items: [
+          "Recurrent, severe, or unexplained hypoglycemia.",
+          "Persistent hyperglycemia despite appropriate, protocol-guided titration.",
+          "Very high total daily insulin requirements or concentrated insulin use.",
+          "Significant renal or hepatic impairment altering insulin handling.",
+          "Pregnancy or pre-conception planning in a patient on insulin.",
+          "Planned bariatric or metabolic surgery, or rapid weight change.",
+        ],
+      },
+
+      { type: "h2", text: "Structured Clinical Decision-Making" },
+      { type: "p", text: "Structure does not replace judgement; it organises it. Making explicit which inputs are considered, in what order, and how a conclusion follows from them is what allows two clinicians reviewing the same patient to reason comparably — and what makes a decision auditable afterwards." },
+
+      { type: "h2", text: "The Role of Clinical Decision-Support Tools" },
+      { type: "p", text: "Decision-support tools apply consistent logic to the inputs a clinician provides and present the reasoning transparently, so it can be interrogated rather than accepted. They do not remove responsibility for assessment or the final decision, and they should always be used within local protocols and professional scope of practice." },
+
+      {
+        type: "callout",
+        text: "See how PreciseDM structures insulin dosing decisions for clinical teams",
+        href: "/features",
+      },
+    ],
+    faqs: [
+      { q: "Why is insulin dosing more complex in patients with obesity?", a: "Obesity is associated with reduced insulin sensitivity, so higher doses are often required, but the increase is not predictably proportional to body weight. Body composition, fat distribution, renal function, and concurrent medication all influence requirements, which limits how far a single formula can be relied upon." },
+      { q: "Is weight-based insulin dosing still useful?", a: "It remains a widely used starting estimate where local protocols specify it. Its value depends on treating the output as an anchor that is then adjusted for clinical context and observed glucose response, rather than as a fixed maintenance dose." },
+      { q: "What limits simple units-per-kilogram calculations?", a: "They assume a uniform relationship between body weight and insulin requirement across a population that is heterogeneous. Total body weight includes tissue contributing little to requirement, and static calculations cannot account for weight change, renal function, or new medication." },
+      { q: "How often should insulin requirements be reassessed in obesity?", a: "Review intervals should follow local protocol and the clinical situation, with reassessment prompted by weight change, altered renal function, new medication, intercurrent illness, or a consistent shift in the glucose pattern rather than a single reading." },
+      { q: "What safety issues deserve particular attention?", a: "Hypoglycemia risk, absorption variability from large subcutaneous doses, lipohypertrophy and injection technique, and clarity around concentrated insulin formulations and devices. Sick-day rules and safety-netting advice should be discussed and documented." },
+      { q: "When should specialist input be sought?", a: "Consider escalation for recurrent or severe hypoglycemia, persistent hyperglycemia despite appropriate titration, very high or concentrated insulin requirements, significant renal or hepatic impairment, pregnancy, and planned metabolic surgery or rapid weight change." },
+      { q: "How do decision-support tools help in this setting?", a: "They apply a consistent sequence of checks and calculations and make the reasoning visible, which reduces variability and cognitive load. The clinician remains responsible for assessment, interpretation, and the final decision within local protocols and scope of practice." },
     ],
   },
 ];
