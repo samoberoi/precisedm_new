@@ -2348,8 +2348,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "managing-diabetes-during-ramadan",
     title: "Managing Diabetes During Ramadan: What Healthcare Providers Need to Know",
+    metaTitle: "Diabetes Management During Ramadan Fasting: Provider Guide",
     excerpt:
-      "Prolonged daily fasting reshapes meal timing, medication schedules, and hypoglycemia risk. Here's how providers can prepare patients well before Ramadan begins.",
+      "Fasting reshapes meal timing, medication schedules and hypoglycemia risk in diabetes. How providers can plan Ramadan care weeks before the month begins.",
     category: "Diabetes Management",
     tags: [
       "diabetes management during Ramadan fasting",
