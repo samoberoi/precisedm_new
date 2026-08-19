@@ -250,14 +250,14 @@ Deno.serve(async (req) => {
       );
     }
 
-    // POST = create user
+    // POST = create user (optionally apply a coupon + send invite email)
     if (req.method === "POST") {
       const body = await req.json();
-      const { email, password, full_name, user_type, custom_user_id } = body;
+      const { email, password, full_name, user_type, custom_user_id, coupon_code, send_invite } = body;
 
-      if (!email || !password || !full_name) {
+      if (!email || !full_name) {
         return new Response(
-          JSON.stringify({ error: "Email, password and full name are required" }),
+          JSON.stringify({ error: "Email and full name are required" }),
           {
             status: 400,
             headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -268,10 +268,15 @@ Deno.serve(async (req) => {
       const isAdmin = user_type === "admin";
       const actualUserType = isAdmin ? "student" : (user_type || "student");
 
+      // Sign-in is OTP based — a password is optional, generate one if not supplied
+      const pwd = password && String(password).length >= 8
+        ? password
+        : crypto.randomUUID() + "Aa1!";
+
       const { data: newUser, error: createError } =
         await supabaseAdmin.auth.admin.createUser({
           email,
-          password,
+          password: pwd,
           email_confirm: true,
           user_metadata: {
             full_name,
@@ -290,11 +295,166 @@ Deno.serve(async (req) => {
         await supabaseAdmin.from("user_roles").insert({ user_id: newUserId, role: "admin" });
       }
 
+      // ---------- Optional: apply a coupon to the brand-new account ----------
+      let couponResult: {
+        code: string;
+        kind: string;
+        percent_off: number;
+        months: number;
+        access_until: string | null;
+        applied: boolean;
+      } | null = null;
+
+      const wantedCode = coupon_code ? String(coupon_code).trim().toUpperCase() : "";
+      if (wantedCode) {
+        const { data: coupon } = await supabaseAdmin
+          .from("coupons")
+          .select("*")
+          .ilike("code", wantedCode)
+          .maybeSingle();
+
+        if (!coupon || !coupon.active) {
+          couponResult = { code: wantedCode, kind: "unknown", percent_off: 0, months: 0, access_until: null, applied: false };
+        } else if (coupon.expires_at && new Date(coupon.expires_at) < new Date()) {
+          couponResult = { code: coupon.code, kind: coupon.kind, percent_off: coupon.percent_off, months: coupon.duration_months, access_until: null, applied: false };
+        } else if (coupon.times_redeemed >= coupon.max_redemptions) {
+          couponResult = { code: coupon.code, kind: coupon.kind, percent_off: coupon.percent_off, months: coupon.duration_months, access_until: null, applied: false };
+        } else if (coupon.kind === "free_access" || coupon.percent_off >= 100) {
+          const now = new Date();
+          const accessUntil = new Date(now.getTime());
+          accessUntil.setMonth(accessUntil.getMonth() + Math.max(1, coupon.duration_months || 1));
+
+          const { data: sub } = await supabaseAdmin
+            .from("subscriptions")
+            .insert({
+              user_id: newUserId,
+              plan_type: "coupon",
+              status: "active",
+              start_date: now.toISOString(),
+              next_billing_date: accessUntil.toISOString(),
+              paypal_subscription_id: `COUPON-${coupon.code}`,
+            })
+            .select()
+            .single();
+
+          await supabaseAdmin.from("coupon_redemptions").insert({
+            coupon_id: coupon.id,
+            user_id: newUserId,
+            subscription_id: sub?.id ?? null,
+            access_until: accessUntil.toISOString(),
+          });
+          await supabaseAdmin
+            .from("coupons")
+            .update({
+              times_redeemed: (coupon.times_redeemed || 0) + 1,
+              assigned_user_id: coupon.assigned_email ? newUserId : coupon.assigned_user_id,
+            })
+            .eq("id", coupon.id);
+
+          couponResult = {
+            code: coupon.code,
+            kind: coupon.kind,
+            percent_off: coupon.percent_off,
+            months: coupon.duration_months,
+            access_until: accessUntil.toISOString(),
+            applied: true,
+          };
+        } else {
+          // Percentage discount — no access granted, the user enters the code at checkout
+          couponResult = {
+            code: coupon.code,
+            kind: coupon.kind,
+            percent_off: coupon.percent_off,
+            months: coupon.duration_months,
+            access_until: null,
+            applied: true,
+          };
+        }
+      }
+
+      // ---------- Invite email ----------
+      let emailSent = false;
+      let emailError: string | null = null;
+      if (send_invite !== false) {
+        const resendKey = Deno.env.get("RESEND_API_KEY");
+        if (!resendKey) {
+          emailError = "Email service is not configured";
+        } else {
+          const appUrl = "https://www.precisedm.com";
+          const firstName = String(full_name).split(" ")[0];
+
+          let perk = "";
+          if (couponResult?.applied && couponResult.access_until) {
+            const until = new Date(couponResult.access_until).toLocaleDateString("en-US", {
+              day: "numeric", month: "long", year: "numeric",
+            });
+            perk = `<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#1f2937">
+                Good news — a complimentary <strong>${couponResult.months}-month</strong> access pass has already been applied to your account.
+                You have full access until <strong>${until}</strong>, with nothing to pay and no code to enter.
+              </p>`;
+          } else if (couponResult?.applied && couponResult.kind === "percent_discount") {
+            perk = `<p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#1f2937">
+                Use coupon code <strong style="letter-spacing:1px">${couponResult.code}</strong> at checkout for
+                <strong>${couponResult.percent_off}% off</strong> your subscription.
+              </p>`;
+          }
+
+          const html = `
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f7fa;padding:32px">
+  <div style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:16px;padding:32px">
+    <h1 style="margin:0 0 8px;font-size:22px;color:#0f172a">You've been invited to PreciseDM</h1>
+    <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#1f2937">
+      Hi ${firstName}, an administrator has created a PreciseDM account for you using <strong>${email}</strong>.
+    </p>
+    ${perk}
+    <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#1f2937">
+      There's no password to remember — just open PreciseDM, enter your email, and we'll send you a one-time code to sign in.
+    </p>
+    <p style="margin:0 0 24px">
+      <a href="${appUrl}/login" style="display:inline-block;background:#22b3e8;color:#ffffff;text-decoration:none;font-weight:700;padding:12px 24px;border-radius:12px">Sign in to PreciseDM</a>
+    </p>
+    <p style="margin:0;font-size:12px;color:#94a3b8">
+      PreciseDM — precision insulin dosing support for clinicians and students.
+    </p>
+  </div>
+</div>`;
+
+          try {
+            const resp = await fetch("https://api.resend.com/emails", {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${resendKey}`,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                from: "PreciseDM <no-reply@hyperrevamp.com>",
+                to: [email],
+                subject: couponResult?.applied && couponResult.access_until
+                  ? `You've been invited to PreciseDM — ${couponResult.months} months on us`
+                  : "You've been invited to PreciseDM",
+                html,
+              }),
+            });
+            if (resp.ok) emailSent = true;
+            else emailError = (await resp.text()).slice(0, 300);
+          } catch (e) {
+            emailError = (e as Error).message;
+          }
+        }
+      }
+
       return new Response(
-        JSON.stringify({ message: "User created", user_id: newUserId }),
+        JSON.stringify({
+          message: "User created",
+          user_id: newUserId,
+          coupon: couponResult,
+          email_sent: emailSent,
+          email_error: emailError,
+        }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
 
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
       status: 405,
