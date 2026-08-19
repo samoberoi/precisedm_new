@@ -74,6 +74,7 @@ interface SubmissionRow {
 }
 
 interface UpcomingRenewal {
+  start_date?: string | null;
   id: string;
   user_id: string;
   plan_type: string;
