@@ -261,12 +261,22 @@ const AdminDashboard = () => {
     setSubscriptionsLoading(false);
   };
 
-  useEffect(() => { fetchUsers(); fetchSubscriptions(); }, []);
+  const fetchCoupons = async () => {
+    try {
+      const headers = await getAuthHeaders();
+      const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
+      const res = await fetch(`https://${projectId}.supabase.co/functions/v1/coupons?action=list`, { headers });
+      const data = await res.json();
+      if (res.ok) setAvailableCoupons(data.coupons || []);
+    } catch { /* coupons are optional */ }
+  };
+
+  useEffect(() => { fetchUsers(); fetchSubscriptions(); fetchCoupons(); }, []);
 
   const handleCreateUser = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.email || !form.password || !form.full_name) {
-      toast({ title: "Error", description: "Fill all required fields", variant: "destructive" });
+    if (!form.email || !form.full_name) {
+      toast({ title: "Error", description: "Full name and email are required", variant: "destructive" });
       return;
     }
     setCreating(true);
@@ -274,19 +284,31 @@ const AdminDashboard = () => {
     const res = await fetch(getBaseUrl(), {
       method: "POST",
       headers,
-      body: JSON.stringify(form),
+      body: JSON.stringify({
+        ...form,
+        coupon_code: form.coupon_code === "none" ? null : form.coupon_code,
+      }),
     });
     const data = await res.json();
     setCreating(false);
     if (res.ok) {
-      toast({ title: "User created successfully" });
+      const bits: string[] = [];
+      if (data.coupon?.applied && data.coupon.access_until) {
+        bits.push(`${data.coupon.months} months free access until ${new Date(data.coupon.access_until).toLocaleDateString()}`);
+      } else if (data.coupon && !data.coupon.applied) {
+        bits.push(`Coupon ${data.coupon.code} could not be applied (inactive, expired or fully redeemed)`);
+      }
+      bits.push(data.email_sent ? "Invitation email sent" : "Invitation email not sent");
+      toast({ title: `${form.full_name} added`, description: bits.join(" · ") });
       setDialogOpen(false);
-      setForm({ email: "", password: "", full_name: "", user_type: "student", custom_user_id: "" });
+      setForm({ email: "", password: "", full_name: "", user_type: "student", custom_user_id: "", coupon_code: "none", send_invite: true });
       fetchUsers();
+      fetchCoupons();
     } else {
       toast({ title: "Error", description: data.error, variant: "destructive" });
     }
   };
+
 
   const handleViewUsers = () => setViewMode("users");
   const handleViewSubmissions = (formType?: string) => { fetchSubmissions(); setSubmissionFormFilter(formType || null); setViewMode("submissions"); };
