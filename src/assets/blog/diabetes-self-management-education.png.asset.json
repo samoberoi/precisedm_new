@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "c82509ea-84e5-45ca-9b79-d17d4845baa9",
-  "project_id": "7ff78999-af58-4443-a884-1d10f3c1d73f",
-  "url": "/__l5e/assets-v1/c82509ea-84e5-45ca-9b79-d17d4845baa9/diabetes-self-management-education.png",
-  "r2_key": "a/v1/7ff78999-af58-4443-a884-1d10f3c1d73f/c82509ea-84e5-45ca-9b79-d17d4845baa9/diabetes-self-management-education.png",
-  "original_filename": "diabetes-self-management-education.png",
-  "size": 275922,
   "content_type": "image/png",
-  "created_at": "2026-08-14T12:06:00Z"
+  "created_at": "2026-08-14T12:06:00Z",
+  "original_filename": "diabetes-self-management-education.png",
+  "project_id": "9be89b83-feed-4d39-a2f7-3f6dbc89ed09",
+  "r2_key": "a/v1/9be89b83-feed-4d39-a2f7-3f6dbc89ed09/c82509ea-84e5-45ca-9b79-d17d4845baa9/diabetes-self-management-education.png",
+  "size": 275922,
+  "url": "/__l5e/assets-v1/c82509ea-84e5-45ca-9b79-d17d4845baa9/diabetes-self-management-education.png",
+  "version": 1
 }

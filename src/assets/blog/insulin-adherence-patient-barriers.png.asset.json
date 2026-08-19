@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "f7000f6e-90bc-459f-abf0-6bd5844905da",
-  "project_id": "7ff78999-af58-4443-a884-1d10f3c1d73f",
-  "url": "/__l5e/assets-v1/f7000f6e-90bc-459f-abf0-6bd5844905da/insulin-adherence-patient-barriers.png",
-  "r2_key": "a/v1/7ff78999-af58-4443-a884-1d10f3c1d73f/f7000f6e-90bc-459f-abf0-6bd5844905da/insulin-adherence-patient-barriers.png",
-  "original_filename": "insulin-adherence-patient-barriers.png",
-  "size": 282431,
   "content_type": "image/png",
-  "created_at": "2026-08-14T12:09:10Z"
+  "created_at": "2026-08-14T12:09:10Z",
+  "original_filename": "insulin-adherence-patient-barriers.png",
+  "project_id": "9be89b83-feed-4d39-a2f7-3f6dbc89ed09",
+  "r2_key": "a/v1/9be89b83-feed-4d39-a2f7-3f6dbc89ed09/f7000f6e-90bc-459f-abf0-6bd5844905da/insulin-adherence-patient-barriers.png",
+  "size": 282431,
+  "url": "/__l5e/assets-v1/f7000f6e-90bc-459f-abf0-6bd5844905da/insulin-adherence-patient-barriers.png",
+  "version": 1
 }
