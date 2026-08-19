@@ -28,6 +28,7 @@ import AboutPage from "./pages/AboutPage";
 import ConnectPage from "./pages/ConnectPage";
 import ProfilePage from "./pages/ProfilePage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminCoupons from "./pages/admin/AdminCoupons";
 import AdminSeo from "./pages/admin/AdminSeo";
 import AdminSeoLogin from "./pages/admin/AdminSeoLogin";
 import DisclaimerPage from "./pages/DisclaimerPage";
@@ -96,6 +97,7 @@ const AnimatedRoutes = () => {
             <Route path="/gestation-tool" element={<SubscriptionGate redirectTo="/subscription-plans"><GestationPage /></SubscriptionGate>} />
             <Route path="/diaform-tool" element={<SubscriptionGate redirectTo="/subscription-plans"><DiaFormPage /></SubscriptionGate>} />
             <Route path="/admin-panel" element={<AdminDashboard />} />
+            <Route path="/admin-panel/coupons" element={<AdminCoupons />} />
           </Route>
 
           {/* Legacy /w/* redirects → keep external links working */}
@@ -140,6 +142,7 @@ const AnimatedRoutes = () => {
           <Route path="/gestation" element={<SubscriptionGate><PageTransition><GestationPage /></PageTransition></SubscriptionGate>} />
           <Route path="/diaform" element={<SubscriptionGate><PageTransition><DiaFormPage /></PageTransition></SubscriptionGate>} />
           <Route path="/admin" element={<PageTransition><AdminDashboard /></PageTransition>} />
+          <Route path="/admin/coupons" element={<PageTransition><AdminCoupons /></PageTransition>} />
           <Route path="/admin/seo/login" element={<PageTransition><AdminSeoLogin /></PageTransition>} />
           <Route path="/admin/seo" element={<PageTransition><AdminSeo /></PageTransition>} />
 

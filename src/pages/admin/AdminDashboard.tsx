@@ -505,6 +505,25 @@ const AdminDashboard = () => {
                 </div>
               </div>
 
+              {/* Coupons */}
+              <div className="mt-5">
+                <motion.button
+                  initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32 }}
+                  onClick={() => navigate("/admin/coupons")}
+                  className="w-full rounded-2xl bg-card border border-border shadow-sm p-4 flex items-center gap-3 text-left active:scale-[0.98] transition-transform"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
+                    <Crown className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-extrabold text-foreground">Coupons</p>
+                    <p className="text-xs text-muted-foreground">Create free-access or discount codes for users</p>
+                  </div>
+                  <div className="flex-1" />
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground" />
+                </motion.button>
+              </div>
+
               {/* Subscription Overview */}
               <div className="mt-5">
                 <div className="flex items-center justify-between mb-3">

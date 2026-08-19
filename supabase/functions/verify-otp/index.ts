@@ -58,11 +58,19 @@ Deno.serve(async (req) => {
       await supabase.from("otp_codes").update({ used: true }).eq("id", otpRecord.id);
     }
 
-    // Check if user exists
-    const { data: existingUsers } = await supabase.auth.admin.listUsers();
-    const existingUser = existingUsers?.users?.find(
-      (u) => u.email?.toLowerCase() === normalizedEmail
-    );
+    // Check if user exists — paginate, listUsers() only returns 50 per page
+    const findUser = async () => {
+      for (let page = 1; page <= 40; page++) {
+        const { data } = await supabase.auth.admin.listUsers({ page, perPage: 1000 });
+        const users = data?.users ?? [];
+        const match = users.find((u) => u.email?.toLowerCase() === normalizedEmail);
+        if (match) return match;
+        if (users.length < 1000) return null;
+      }
+      return null;
+    };
+
+    let existingUser = await findUser();
 
     let userId: string;
 
@@ -85,9 +93,17 @@ Deno.serve(async (req) => {
         },
       });
 
-      if (createError) throw createError;
-      userId = newUser.user.id;
+      if (createError) {
+        // Race / stale-listing safety: the account really does exist, so sign them in.
+        const retry = await findUser();
+        if (!retry) throw createError;
+        existingUser = retry;
+        userId = retry.id;
+      } else {
+        userId = newUser.user.id;
+      }
     }
+
 
     // Generate a session link for the user
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
