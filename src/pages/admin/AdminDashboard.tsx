@@ -649,6 +649,22 @@ const AdminDashboard = () => {
                   </motion.button>
                 </div>
 
+                {/* Renewal pulse */}
+                <div className="grid grid-cols-3 gap-3 mt-3">
+                  <div className="rounded-2xl bg-card border border-border shadow-sm p-4">
+                    <p className="text-[10px] font-semibold text-muted-foreground mb-1">Renews ≤ 7d</p>
+                    <p className="text-2xl font-black text-amber-600">{subStats.renewalsNext7}</p>
+                  </div>
+                  <div className="rounded-2xl bg-card border border-border shadow-sm p-4">
+                    <p className="text-[10px] font-semibold text-muted-foreground mb-1">Renews ≤ 30d</p>
+                    <p className="text-2xl font-black text-primary">{subStats.renewalsNext30}</p>
+                  </div>
+                  <div className="rounded-2xl bg-card border border-border shadow-sm p-4">
+                    <p className="text-[10px] font-semibold text-muted-foreground mb-1">Expired</p>
+                    <p className="text-2xl font-black text-destructive">{subStats.expired}</p>
+                  </div>
+                </div>
+
                 {/* Upcoming Renewals */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
@@ -657,11 +673,11 @@ const AdminDashboard = () => {
                   <div className="flex items-center gap-2 mb-3">
                     <Clock className="h-4 w-4 text-primary" />
                     <h3 className="text-sm font-bold text-foreground">Upcoming Renewals</h3>
-                    <span className="text-[10px] font-semibold bg-primary/10 text-primary px-2 py-0.5 rounded-full">Next 15 Days</span>
+                    <span className="text-[10px] font-semibold bg-primary/10 text-primary px-2 py-0.5 rounded-full">Next 30 Days</span>
                   </div>
-                  {subStats.upcomingRenewals.length > 0 ? (
+                  {subStats.renewals30.length > 0 ? (
                     <div className="space-y-2">
-                      {subStats.upcomingRenewals.map((r) => {
+                      {subStats.renewals30.map((r) => {
                         const daysLeft = Math.max(0, Math.ceil((new Date(r.next_billing_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
                         return (
                           <div key={r.id} className="flex items-center gap-3 rounded-xl bg-muted/30 p-3">
@@ -671,10 +687,13 @@ const AdminDashboard = () => {
                             <div className="flex-1 min-w-0">
                               <p className="text-sm font-semibold text-foreground truncate">{r.user_name}</p>
                               <p className="text-xs text-muted-foreground truncate">{r.user_email}</p>
+                              <p className="text-[10px] text-muted-foreground mt-0.5">
+                                Started {r.start_date ? new Date(r.start_date).toLocaleDateString() : "—"} · Renews {new Date(r.next_billing_date).toLocaleDateString()}
+                              </p>
                             </div>
                             <div className="text-right shrink-0">
-                              <p className={`text-sm font-black ${daysLeft <= 3 ? "text-destructive" : "text-foreground"}`}>{daysLeft}d</p>
-                              <p className="text-[10px] text-muted-foreground">{r.plan_type}</p>
+                              <p className={`text-sm font-black ${daysLeft <= 3 ? "text-destructive" : daysLeft <= 7 ? "text-amber-600" : "text-foreground"}`}>{daysLeft}d</p>
+                              <p className="text-[10px] text-muted-foreground capitalize">{r.plan_type}</p>
                             </div>
                           </div>
                         );
@@ -683,7 +702,7 @@ const AdminDashboard = () => {
                   ) : (
                     <div className="text-center py-4">
                       <CheckCircle2 className="h-8 w-8 text-primary/30 mx-auto mb-2" />
-                      <p className="text-sm text-muted-foreground">No renewals in the next 15 days</p>
+                      <p className="text-sm text-muted-foreground">No renewals in the next 30 days</p>
                     </div>
                   )}
                 </motion.div>
