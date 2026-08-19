@@ -12,7 +12,7 @@ import {
 } from "@/lib/native-auth";
 
 const NativeAuthGate = ({ children }: { children: React.ReactNode }) => {
-  const { loading, user, signOut } = useAuth();
+  const { loading, session, user, signOut } = useAuth();
   const navigate = useNavigate();
   const [locked, setLocked] = useState(isNativeApp());
   const [checking, setChecking] = useState(isNativeApp());
@@ -29,6 +29,10 @@ const NativeAuthGate = ({ children }: { children: React.ReactNode }) => {
     try {
       const enabled = await isBiometricLoginEnabled();
       if (!enabled) {
+        if (session) {
+          const { enableBiometricLogin } = await import("@/lib/native-auth");
+          await enableBiometricLogin(session);
+        }
         setLocked(false);
         return;
       }
@@ -46,7 +50,7 @@ const NativeAuthGate = ({ children }: { children: React.ReactNode }) => {
       setChecking(false);
       authenticating.current = false;
     }
-  }, [loading, user]);
+  }, [loading, session, user]);
 
   useEffect(() => {
     if (!loading) void unlock();
