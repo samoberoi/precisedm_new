@@ -11,6 +11,10 @@ import SubscriptionGate from "@/components/SubscriptionGate";
 import PageTransition from "@/components/PageTransition";
 import BottomNav from "@/components/BottomNav";
 import ScrollToTop from "@/components/ScrollToTop";
+import NativeAuthGate from "@/components/NativeAuthGate";
+import { useAuth } from "@/contexts/AuthContext";
+import { hasCompletedOnboarding } from "@/lib/native-auth";
+import { useEffect, useState } from "react";
 
 // Onboarding
 import SplashScreen from "./pages/onboarding/SplashScreen";
@@ -61,6 +65,21 @@ const queryClient = new QueryClient();
 
 const PAGES_WITH_NAV = ["/home", "/about", "/connect", "/profile", "/disclaimer", "/subscription", "/steroid", "/maintenance", "/gestation", "/diaform", "/admin"];
 
+const NativeEntry = () => {
+  const { user, loading } = useAuth();
+  const [onboarded, setOnboarded] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    void hasCompletedOnboarding().then(setOnboarded);
+  }, []);
+
+  if (loading || onboarded === null) {
+    return <div className="flex min-h-screen items-center justify-center bg-background"><div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" /></div>;
+  }
+  if (user) return <Navigate to="/home" replace />;
+  return <Navigate to={onboarded ? "/login" : "/onboarding/splash"} replace />;
+};
+
 const AnimatedRoutes = () => {
   const location = useLocation();
   const showNav = PAGES_WITH_NAV.includes(location.pathname);
@@ -72,7 +91,7 @@ const AnimatedRoutes = () => {
         <Routes location={location} key={location.pathname}>
           {/* Native mobile root → splash */}
           {Capacitor.isNativePlatform() && (
-            <Route path="/" element={<Navigate to="/onboarding/splash" replace />} />
+            <Route path="/" element={<NativeEntry />} />
           )}
 
           {/* Website routes with header + footer layout (web only at root) */}
@@ -165,7 +184,9 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <AuthProvider>
-            <AnimatedRoutes />
+            <NativeAuthGate>
+              <AnimatedRoutes />
+            </NativeAuthGate>
           </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
