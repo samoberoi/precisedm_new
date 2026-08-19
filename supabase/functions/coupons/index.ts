@@ -92,7 +92,7 @@ Deno.serve(async (req) => {
         .from("subscriptions")
         .insert({
           user_id: user.id,
-          plan_type: `coupon_${coupon.duration_months}m`,
+          plan_type: "coupon",
           status: "active",
           start_date: now.toISOString(),
           next_billing_date: accessUntil.toISOString(),
@@ -201,7 +201,7 @@ Deno.serve(async (req) => {
           .from("subscriptions")
           .insert({
             user_id: assignedUserId,
-            plan_type: `coupon_${durationMonths}m`,
+            plan_type: "coupon",
             status: "active",
             start_date: now.toISOString(),
             next_billing_date: accessUntil.toISOString(),
