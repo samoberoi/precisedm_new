@@ -239,6 +239,11 @@ Deno.serve(async (req) => {
             monthly: monthlySubs.length,
             yearly: yearlySubs.length,
             upcomingRenewals,
+            renewals30,
+            renewalsNext7: inDays(7).length,
+            renewalsNext30: renewals30.length,
+            expired: expiredSubs.length,
+            expiredSubs: expiredSubs.slice(0, 25),
           },
         }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
