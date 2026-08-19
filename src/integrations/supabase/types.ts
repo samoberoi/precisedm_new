@@ -14,6 +14,95 @@ export type Database = {
   }
   public: {
     Tables: {
+      coupon_redemptions: {
+        Row: {
+          access_until: string | null
+          coupon_id: string
+          id: string
+          redeemed_at: string
+          subscription_id: string | null
+          user_id: string
+        }
+        Insert: {
+          access_until?: string | null
+          coupon_id: string
+          id?: string
+          redeemed_at?: string
+          subscription_id?: string | null
+          user_id: string
+        }
+        Update: {
+          access_until?: string | null
+          coupon_id?: string
+          id?: string
+          redeemed_at?: string
+          subscription_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coupon_redemptions_coupon_id_fkey"
+            columns: ["coupon_id"]
+            isOneToOne: false
+            referencedRelation: "coupons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      coupons: {
+        Row: {
+          active: boolean
+          assigned_email: string | null
+          assigned_user_id: string | null
+          code: string
+          created_at: string
+          created_by: string | null
+          description: string | null
+          duration_months: number
+          expires_at: string | null
+          id: string
+          kind: string
+          max_redemptions: number
+          percent_off: number
+          times_redeemed: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          assigned_email?: string | null
+          assigned_user_id?: string | null
+          code: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration_months?: number
+          expires_at?: string | null
+          id?: string
+          kind?: string
+          max_redemptions?: number
+          percent_off?: number
+          times_redeemed?: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          assigned_email?: string | null
+          assigned_user_id?: string | null
+          code?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration_months?: number
+          expires_at?: string | null
+          id?: string
+          kind?: string
+          max_redemptions?: number
+          percent_off?: number
+          times_redeemed?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       form_submissions: {
         Row: {
           created_at: string

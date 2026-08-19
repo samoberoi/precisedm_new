@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { getPaymentRedirectBaseUrl, shouldUseWebsitePaymentRoutes } from "@/lib/website-routes";
+import CouponRedeem from "@/components/CouponRedeem";
 
 
 const standardPlans = [
@@ -408,6 +409,11 @@ const SubscriptionPage = () => {
             ))}
           </div>
         )}
+
+        <div className="mt-6">
+          <CouponRedeem onRedeemed={() => refresh()} />
+        </div>
+
 
         <div className="flex items-center justify-center gap-6 mt-6 mb-4">
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground"><Shield className="h-3.5 w-3.5" /> Secure Payment</div>
