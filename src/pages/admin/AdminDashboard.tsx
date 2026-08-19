@@ -57,6 +57,12 @@ interface UserRow {
   custom_user_id: string;
   created_at: string;
   last_sign_in_at: string | null;
+  plan_type: string | null;
+  subscription_status: string;
+  start_date: string | null;
+  next_billing_date: string | null;
+  days_remaining: number | null;
+  paypal_subscription_id: string | null;
 }
 
 interface SubmissionRow {
