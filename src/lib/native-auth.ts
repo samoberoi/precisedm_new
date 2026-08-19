@@ -64,7 +64,6 @@ export async function authenticateWithBiometrics(reason = "Unlock PreciseDM") {
     androidTitle: "Unlock PreciseDM",
     androidSubtitle: "Confirm your identity to continue",
     androidConfirmationRequired: false,
-    androidBiometryStrength: hasBiometry ? undefined : undefined,
   });
   return true;
 }
