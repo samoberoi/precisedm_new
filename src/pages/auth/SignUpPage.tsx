@@ -11,6 +11,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp
 import PreciseLogo from "@/components/PreciseLogo";
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft, Loader2 } from "lucide-react";
+import { enableBiometricLogin, markOnboardingComplete } from "@/lib/native-auth";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -80,6 +81,15 @@ const SignUpPage = () => {
       }
 
       toast({ title: "Account created!", description: "Welcome to PreciseDM." });
+      await markOnboardingComplete();
+      const { data: current } = await supabase.auth.getSession();
+      if (current.session) {
+        try {
+          await enableBiometricLogin(current.session);
+        } catch {
+          // Biometric enrollment is optional; account creation must still complete.
+        }
+      }
       navigate("/home");
     } catch (err: any) {
       toast({ title: err.message || "Verification failed", variant: "destructive" });

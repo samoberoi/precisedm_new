@@ -11,6 +11,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp
 import PreciseLogo from "@/components/PreciseLogo";
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft, Mail, Loader2 } from "lucide-react";
+import { enableBiometricLogin, markOnboardingComplete } from "@/lib/native-auth";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -80,6 +81,12 @@ const LoginPage = () => {
       toast({ title: "Welcome to PreciseDM!" });
       const { data: session } = await supabase.auth.getSession();
       if (session?.session?.user) {
+        await markOnboardingComplete();
+        try {
+          await enableBiometricLogin(session.session);
+        } catch {
+          // Biometric enrollment is optional; OTP login must still complete.
+        }
         const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: session.session.user.id, _role: "admin" });
         navigate(isAdmin ? "/admin" : "/home");
       } else {

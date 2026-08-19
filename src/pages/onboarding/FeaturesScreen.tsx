@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import onboardingImg from "@/assets/onboarding-features.jpg";
 import logoIcon from "@/assets/logo-icon.png";
+import { markOnboardingComplete } from "@/lib/native-auth";
 
 const FeaturesScreen = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const FeaturesScreen = () => {
         </motion.div>
       </div>
       <div className="fixed bottom-8 left-0 right-0 px-8">
-        <Button onClick={() => navigate("/login")} className="w-full h-13 rounded-2xl text-base font-bold gradient-primary glow-primary flex items-center justify-center gap-2">
+        <Button onClick={() => { void markOnboardingComplete(); navigate("/login"); }} className="w-full h-13 rounded-2xl text-base font-bold gradient-primary glow-primary flex items-center justify-center gap-2">
           Get Started <ArrowUpRight className="h-5 w-5" />
         </Button>
       </div>

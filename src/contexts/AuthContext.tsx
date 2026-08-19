@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { clearNativeLogin, saveNativeSession } from "@/lib/native-auth";
 
 interface AuthContextType {
   session: Session | null;
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
+        if (session) void saveNativeSession(session);
       }
     );
 
@@ -38,8 +40,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    setSession(null);
+    setUser(null);
     setSkipMode(false);
+    await clearNativeLogin();
+    await supabase.auth.signOut({ scope: "local" });
   };
 
   return (
