@@ -49,8 +49,8 @@ const SignUpPage = () => {
       if (!res.ok) throw new Error(data.error || "Failed to send code");
       toast({ title: "Code sent!", description: "Check your email for the verification code." });
       setStep("otp");
-    } catch (err: any) {
-      toast({ title: err.message || "Failed to send code", variant: "destructive" });
+    } catch (err: unknown) {
+      toast({ title: err instanceof Error ? err.message : "Failed to send code", variant: "destructive" });
     } finally {
       setLoading(false);
     }
@@ -91,8 +91,8 @@ const SignUpPage = () => {
         }
       }
       navigate("/home");
-    } catch (err: any) {
-      toast({ title: err.message || "Verification failed", variant: "destructive" });
+    } catch (err: unknown) {
+      toast({ title: err instanceof Error ? err.message : "Verification failed", variant: "destructive" });
       setOtp("");
     } finally {
       setLoading(false);
