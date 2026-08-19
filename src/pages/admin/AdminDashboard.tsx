@@ -185,7 +185,14 @@ const AdminDashboard = () => {
     full_name: "",
     user_type: "student",
     custom_user_id: "",
+    coupon_code: "none",
+    send_invite: true,
   });
+  const [availableCoupons, setAvailableCoupons] = useState<Array<{
+    id: string; code: string; kind: string; percent_off: number; duration_months: number;
+    active: boolean; max_redemptions: number; times_redeemed: number; expires_at: string | null;
+  }>>([]);
+
   const [subStats, setSubStats] = useState<SubscriptionStats>({
     totalSubscribed: 0,
     totalUnsubscribed: 0,
@@ -254,12 +261,22 @@ const AdminDashboard = () => {
     setSubscriptionsLoading(false);
   };
 
-  useEffect(() => { fetchUsers(); fetchSubscriptions(); }, []);
+  const fetchCoupons = async () => {
+    try {
+      const headers = await getAuthHeaders();
+      const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
+      const res = await fetch(`https://${projectId}.supabase.co/functions/v1/coupons?action=list`, { headers });
+      const data = await res.json();
+      if (res.ok) setAvailableCoupons(data.coupons || []);
+    } catch { /* coupons are optional */ }
+  };
+
+  useEffect(() => { fetchUsers(); fetchSubscriptions(); fetchCoupons(); }, []);
 
   const handleCreateUser = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.email || !form.password || !form.full_name) {
-      toast({ title: "Error", description: "Fill all required fields", variant: "destructive" });
+    if (!form.email || !form.full_name) {
+      toast({ title: "Error", description: "Full name and email are required", variant: "destructive" });
       return;
     }
     setCreating(true);
@@ -267,19 +284,31 @@ const AdminDashboard = () => {
     const res = await fetch(getBaseUrl(), {
       method: "POST",
       headers,
-      body: JSON.stringify(form),
+      body: JSON.stringify({
+        ...form,
+        coupon_code: form.coupon_code === "none" ? null : form.coupon_code,
+      }),
     });
     const data = await res.json();
     setCreating(false);
     if (res.ok) {
-      toast({ title: "User created successfully" });
+      const bits: string[] = [];
+      if (data.coupon?.applied && data.coupon.access_until) {
+        bits.push(`${data.coupon.months} months free access until ${new Date(data.coupon.access_until).toLocaleDateString()}`);
+      } else if (data.coupon && !data.coupon.applied) {
+        bits.push(`Coupon ${data.coupon.code} could not be applied (inactive, expired or fully redeemed)`);
+      }
+      bits.push(data.email_sent ? "Invitation email sent" : "Invitation email not sent");
+      toast({ title: `${form.full_name} added`, description: bits.join(" · ") });
       setDialogOpen(false);
-      setForm({ email: "", password: "", full_name: "", user_type: "student", custom_user_id: "" });
+      setForm({ email: "", password: "", full_name: "", user_type: "student", custom_user_id: "", coupon_code: "none", send_invite: true });
       fetchUsers();
+      fetchCoupons();
     } else {
       toast({ title: "Error", description: data.error, variant: "destructive" });
     }
   };
+
 
   const handleViewUsers = () => setViewMode("users");
   const handleViewSubmissions = (formType?: string) => { fetchSubmissions(); setSubmissionFormFilter(formType || null); setViewMode("submissions"); };
@@ -376,8 +405,8 @@ const AdminDashboard = () => {
         <Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="user@example.com" className="h-11 rounded-xl bg-muted/40" />
       </div>
       <div className="space-y-1.5">
-        <Label>Password *</Label>
-        <Input type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="Min. 8 characters" className="h-11 rounded-xl bg-muted/40" />
+        <Label>Password (optional)</Label>
+        <Input type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="Leave blank — users sign in with an email OTP" className="h-11 rounded-xl bg-muted/40" />
       </div>
       <div className="space-y-1.5">
         <Label>User Type</Label>
@@ -391,9 +420,40 @@ const AdminDashboard = () => {
         </Select>
       </div>
       <div className="space-y-1.5">
+        <Label>Coupon (optional)</Label>
+        <Select value={form.coupon_code} onValueChange={(v) => setForm({ ...form, coupon_code: v })}>
+          <SelectTrigger className="h-11 rounded-xl bg-muted/40"><SelectValue placeholder="No coupon" /></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="none">No coupon — regular account</SelectItem>
+            {availableCoupons
+              .filter((c) => c.active && c.times_redeemed < c.max_redemptions && (!c.expires_at || new Date(c.expires_at) > new Date()))
+              .map((c) => (
+                <SelectItem key={c.id} value={c.code}>
+                  {c.code} — {c.kind === "free_access"
+                    ? `${c.duration_months} month${c.duration_months > 1 ? "s" : ""} free`
+                    : `${c.percent_off}% off`}
+                </SelectItem>
+              ))}
+          </SelectContent>
+        </Select>
+        <p className="text-[11px] text-muted-foreground">
+          Free-access coupons are applied instantly — the user signs in with no payment prompt.
+        </p>
+      </div>
+      <label className="flex items-center gap-3 rounded-xl bg-muted/40 p-3 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={form.send_invite}
+          onChange={(e) => setForm({ ...form, send_invite: e.target.checked })}
+          className="h-4 w-4 accent-primary"
+        />
+        <span className="text-sm font-medium text-foreground">Email them an invitation</span>
+      </label>
+      <div className="space-y-1.5">
         <Label>User ID (optional)</Label>
         <Input value={form.custom_user_id} onChange={(e) => setForm({ ...form, custom_user_id: e.target.value })} placeholder="Hospital / Student ID" className="h-11 rounded-xl bg-muted/40" />
       </div>
+
       <Button type="submit" disabled={creating} className="w-full h-11 rounded-xl font-semibold gradient-primary text-primary-foreground">
         {creating ? "Creating..." : "Create User"}
       </Button>
@@ -472,7 +532,7 @@ const AdminDashboard = () => {
                       </DialogTrigger>
                       <DialogContent className="mx-4 rounded-2xl">
                         <DialogHeader><DialogTitle>Add New User</DialogTitle></DialogHeader>
-                        <CreateUserForm />
+                        {CreateUserForm()}
                       </DialogContent>
                     </Dialog>
                   </div>
@@ -732,7 +792,7 @@ const AdminDashboard = () => {
                   </DialogTrigger>
                   <DialogContent className="mx-4 rounded-2xl">
                     <DialogHeader><DialogTitle>Add New User</DialogTitle></DialogHeader>
-                    <CreateUserForm />
+                    {CreateUserForm()}
                   </DialogContent>
                 </Dialog>
               </div>
