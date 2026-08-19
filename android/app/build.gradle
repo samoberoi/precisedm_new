@@ -4,7 +4,7 @@ android {
     namespace = "com.precisedm.app"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.precisedm.app"
+        applicationId "com.precisedm"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 15
