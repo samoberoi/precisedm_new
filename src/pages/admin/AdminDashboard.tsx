@@ -717,6 +717,37 @@ const AdminDashboard = () => {
                 </Dialog>
               </div>
 
+              {/* Package summary */}
+              <div className="grid grid-cols-4 gap-2 mb-4">
+                {([
+                  { key: "all", label: "Users", value: userPlanCounts.all, tone: "text-foreground" },
+                  { key: "active", label: "On Package", value: userPlanCounts.active, tone: "text-primary" },
+                  { key: "renewing", label: "Renew ≤30d", value: userPlanCounts.renewing, tone: "text-amber-600" },
+                  { key: "expired", label: "Expired", value: userPlanCounts.expired, tone: "text-destructive" },
+                ] as const).map((c) => (
+                  <button key={c.key} onClick={() => setUserPlanFilter(c.key)}
+                    className={`rounded-2xl border p-3 text-left transition-all active:scale-[0.97] ${
+                      userPlanFilter === c.key ? "border-primary bg-primary/5" : "border-border bg-card"
+                    }`}
+                  >
+                    <p className={`text-xl font-black ${c.tone}`}>{loading ? "—" : c.value}</p>
+                    <p className="text-[10px] font-semibold text-muted-foreground leading-tight mt-0.5">{c.label}</p>
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex gap-2 mb-3 overflow-x-auto pb-1 -mx-1 px-1">
+                {(["all", "active", "renewing", "expired", "none"] as const).map((f) => (
+                  <button key={f} onClick={() => setUserPlanFilter(f)}
+                    className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all whitespace-nowrap ${
+                      userPlanFilter === f ? "gradient-primary text-primary-foreground border-transparent" : "border-border bg-card text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {f === "all" ? "All" : f === "none" ? "No Package" : f === "renewing" ? "Renewing Soon" : f.charAt(0).toUpperCase() + f.slice(1)}
+                  </button>
+                ))}
+              </div>
+
               <FilterBar
                 dateFilter={userDateFilter} onDateFilterChange={(v) => setUserDateFilter(v)}
                 searchQuery={userSearchQuery} onSearchChange={setUserSearchQuery}
@@ -727,22 +758,64 @@ const AdminDashboard = () => {
 
               {loading ? <LoadingSpinner /> : (
                 <div className="space-y-2">
-                  {filteredUsers.map((u, i) => (
-                    <motion.div key={u.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}
-                      className="rounded-2xl bg-card border border-border shadow-sm p-3 flex items-center gap-3"
-                    >
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full gradient-primary text-primary-foreground font-bold text-sm shrink-0">
-                        {(u.full_name || u.email).charAt(0).toUpperCase()}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-foreground truncate">{u.full_name || "—"}</p>
-                        <p className="text-xs text-muted-foreground truncate">{u.email}</p>
-                      </div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-1 rounded-full shrink-0 capitalize">
-                        {u.user_type}
-                      </span>
-                    </motion.div>
-                  ))}
+                  {filteredUsers.map((u, i) => {
+                    const d = u.days_remaining;
+                    const statusTone =
+                      u.subscription_status === "active"
+                        ? (d !== null && d <= 7 ? "bg-amber-500/10 text-amber-600" : "bg-primary/10 text-primary")
+                        : u.subscription_status === "expired"
+                        ? "bg-destructive/10 text-destructive"
+                        : "bg-muted text-muted-foreground";
+                    const statusLabel =
+                      u.subscription_status === "active" ? (u.plan_type || "active")
+                      : u.subscription_status === "expired" ? "Expired"
+                      : u.subscription_status === "none" ? "No package"
+                      : u.subscription_status;
+                    return (
+                      <motion.div key={u.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i, 15) * 0.03 }}
+                        className="rounded-2xl bg-card border border-border shadow-sm p-3"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-full gradient-primary text-primary-foreground font-bold text-sm shrink-0">
+                            {(u.full_name || u.email).charAt(0).toUpperCase()}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-foreground truncate">{u.full_name || "—"}</p>
+                            <p className="text-xs text-muted-foreground truncate">{u.email}</p>
+                          </div>
+                          <div className="flex flex-col items-end gap-1 shrink-0">
+                            <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full capitalize ${statusTone}`}>
+                              {statusLabel}
+                            </span>
+                            <span className="text-[10px] text-muted-foreground capitalize">{u.user_type}</span>
+                          </div>
+                        </div>
+
+                        <div className="mt-2.5 grid grid-cols-3 gap-2 rounded-xl bg-muted/30 px-3 py-2">
+                          <div>
+                            <p className="text-[9px] uppercase tracking-wider text-muted-foreground font-semibold">Started</p>
+                            <p className="text-[11px] font-semibold text-foreground">
+                              {u.start_date ? new Date(u.start_date).toLocaleDateString() : "—"}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-[9px] uppercase tracking-wider text-muted-foreground font-semibold">
+                              {u.subscription_status === "expired" ? "Ended" : "Renews"}
+                            </p>
+                            <p className="text-[11px] font-semibold text-foreground">
+                              {u.next_billing_date ? new Date(u.next_billing_date).toLocaleDateString() : "—"}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-[9px] uppercase tracking-wider text-muted-foreground font-semibold">Days Left</p>
+                            <p className={`text-[11px] font-bold ${d === null ? "text-muted-foreground" : d <= 0 ? "text-destructive" : d <= 7 ? "text-amber-600" : "text-foreground"}`}>
+                              {d === null ? "—" : d <= 0 ? "Expired" : `${d}d`}
+                            </p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
                   {filteredUsers.length === 0 && <EmptyState message="No users found for this filter" />}
                 </div>
               )}
