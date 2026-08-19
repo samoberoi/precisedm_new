@@ -7,9 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
+    "native": "node scripts/native-setup.mjs",
     "native:configure": "node scripts/configure-native.mjs",
-    "native:sync": "npm run build && npx cap sync && npm run native:configure",
-    "icons:android": "npx @capacitor/assets generate --android",
+    "native:sync": "npm run build && npx cap sync && npm run native:assets && npm run native:configure",
+    "native:assets": "npx @capacitor/assets generate --iconBackgroundColor \"#38B6FF\" --splashBackgroundColor \"#38B6FF\" --splashBackgroundColorDark \"#0B1220\"",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
@@ -82,6 +83,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
     "@eslint/js": "^9.32.0",
     "@lovable.dev/vite-plugin-dev-server-bridge": "^1.0.2",
     "@lovable.dev/vite-plugin-hmr-gate": "^1.8.0",
