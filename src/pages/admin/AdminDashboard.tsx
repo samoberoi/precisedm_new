@@ -185,7 +185,14 @@ const AdminDashboard = () => {
     full_name: "",
     user_type: "student",
     custom_user_id: "",
+    coupon_code: "none",
+    send_invite: true,
   });
+  const [availableCoupons, setAvailableCoupons] = useState<Array<{
+    id: string; code: string; kind: string; percent_off: number; duration_months: number;
+    active: boolean; max_redemptions: number; times_redeemed: number; expires_at: string | null;
+  }>>([]);
+
   const [subStats, setSubStats] = useState<SubscriptionStats>({
     totalSubscribed: 0,
     totalUnsubscribed: 0,
