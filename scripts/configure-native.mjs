@@ -45,7 +45,7 @@ if (existsSync(plistPath)) {
     console.log("✓ iOS: Face ID usage description already present.");
   }
 } else {
-  console.log("• iOS project not found — run `npx cap add ios` first.");
+  throw new Error("iOS project not found; Face ID configuration was not applied.");
 }
 
 /* -------------------------------- Android -------------------------------- */
@@ -70,5 +70,18 @@ if (existsSync(manifestPath)) {
     console.log("✓ Android: biometric permissions already present.");
   }
 } else {
-  console.log("• Android project not found — run `npx cap add android` first.");
+  throw new Error("Android project not found; biometric permissions were not applied.");
 }
+
+// Fail the native setup instead of printing a misleading success message.
+const configuredPlist = readFileSync(plistPath, "utf8");
+const configuredManifest = readFileSync(manifestPath, "utf8");
+if (!configuredPlist.includes("<key>NSFaceIDUsageDescription</key>")) {
+  throw new Error("NSFaceIDUsageDescription is missing after native configuration.");
+}
+for (const permission of ["android.permission.USE_BIOMETRIC", "android.permission.USE_FINGERPRINT"]) {
+  if (!configuredManifest.includes(permission)) {
+    throw new Error(`${permission} is missing after native configuration.`);
+  }
+}
+console.log("✓ Native biometric configuration verified.");

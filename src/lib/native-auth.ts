@@ -51,16 +51,16 @@ export async function saveNativeSession(session: Session) {
 export async function authenticateWithBiometrics(reason = "Unlock PreciseDM") {
   if (!isNativeApp()) return true;
   const availability = await BiometricAuth.checkBiometry();
-  const hasBiometry = availability.isAvailable;
-  if (!hasBiometry && !availability.deviceIsSecure) return false;
+  if (!availability.isAvailable) return false;
 
-  // Prefer true biometrics (Face ID / fingerprint). Only fall back to the
-  // device passcode when the device has no enrolled biometrics at all.
+  // This is intentionally biometric-only. A PIN/passcode must never enroll
+  // or unlock biometric login, otherwise the app can incorrectly mark
+  // biometrics as enabled without Face ID/Touch ID/fingerprint succeeding.
   await BiometricAuth.authenticate({
     reason,
     cancelTitle: "Use email code",
-    allowDeviceCredential: !hasBiometry,
-    iosFallbackTitle: hasBiometry ? "" : "Use device passcode",
+    allowDeviceCredential: false,
+    iosFallbackTitle: "",
     androidTitle: "Unlock PreciseDM",
     androidSubtitle: "Confirm your identity to continue",
     androidConfirmationRequired: false,
@@ -72,8 +72,8 @@ export async function enableBiometricLogin(session: Session) {
   if (!isNativeApp()) return false;
   await markOnboardingComplete();
 
-  const available = await authenticateWithBiometrics("Enable Face ID or biometrics for PreciseDM");
-  if (!available) return false;
+  const authenticated = await authenticateWithBiometrics("Enable biometric login for PreciseDM");
+  if (!authenticated) return false;
 
   await Preferences.set({ key: BIOMETRIC_KEY, value: "true" });
   await saveNativeSession(session);

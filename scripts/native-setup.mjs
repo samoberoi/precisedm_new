@@ -14,9 +14,10 @@ const run = (cmd) => {
   execSync(cmd, { stdio: "inherit" });
 };
 
-const isMac = process.platform === "darwin";
-
-if (isMac && !existsSync("ios")) run("npx cap add ios");
+// Capacitor can generate the Xcode project on every supported host. Keeping
+// both native projects in source control makes required privacy keys and
+// permissions deterministic instead of depending on each developer's Mac.
+if (!existsSync("ios")) run("npx cap add ios");
 if (!existsSync("android")) run("npx cap add android");
 
 run("npm run build");

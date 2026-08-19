@@ -94,7 +94,7 @@ const NativeAuthGate = ({ children }: { children: React.ReactNode }) => {
         </div>
         <h1 className="mt-6 text-2xl font-extrabold text-foreground">Unlock PreciseDM</h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          {message || "Confirm with Face ID, fingerprint, or your device passcode."}
+          {message || "Confirm with Face ID, Touch ID, or fingerprint."}
         </p>
         <Button onClick={() => void unlock()} disabled={checking} className="mt-7 h-12 w-full rounded-2xl font-bold gradient-primary">
           {checking ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Checking…</> : <><Fingerprint className="mr-2 h-4 w-4" /> Unlock</>}
