@@ -342,9 +342,24 @@ const AdminDashboard = () => {
     return users.filter((u) => {
       const inDate = range ? (() => { const d = new Date(u.created_at); return d >= range.start && d < range.end; })() : true;
       const inSearch = !userSearchQuery || `${u.full_name} ${u.email}`.toLowerCase().includes(userSearchQuery.toLowerCase());
-      return inDate && inSearch;
+      const d = u.days_remaining;
+      const inPlan =
+        userPlanFilter === "all" ? true :
+        userPlanFilter === "active" ? u.subscription_status === "active" :
+        userPlanFilter === "renewing" ? u.subscription_status === "active" && d !== null && d <= 30 :
+        userPlanFilter === "expired" ? u.subscription_status === "expired" :
+        userPlanFilter === "none" ? u.subscription_status === "none" : true;
+      return inDate && inSearch && inPlan;
     });
-  }, [users, userDateFilter, userSearchQuery, userCustomStartDate, userCustomEndDate]);
+  }, [users, userDateFilter, userSearchQuery, userCustomStartDate, userCustomEndDate, userPlanFilter]);
+
+  const userPlanCounts = useMemo(() => ({
+    all: users.length,
+    active: users.filter((u) => u.subscription_status === "active").length,
+    renewing: users.filter((u) => u.subscription_status === "active" && u.days_remaining !== null && u.days_remaining <= 30).length,
+    expired: users.filter((u) => u.subscription_status === "expired").length,
+    none: users.filter((u) => u.subscription_status === "none").length,
+  }), [users]);
 
   const firstName = user?.user_metadata?.full_name?.split(" ")[0] || "Admin";
 
