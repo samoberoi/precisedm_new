@@ -51,7 +51,10 @@ export async function saveNativeSession(session: Session) {
 export async function authenticateWithBiometrics(reason = "Unlock PreciseDM") {
   if (!isNativeApp()) return true;
   const availability = await BiometricAuth.checkBiometry();
-  if (!availability.isAvailable) return false;
+  if (!availability.isAvailable) {
+    const detail = availability.reason ? ` ${availability.reason}` : "";
+    throw new Error(`Face ID, Touch ID, or fingerprint is not available to PreciseDM.${detail}`);
+  }
 
   // This is intentionally biometric-only. A PIN/passcode must never enroll
   // or unlock biometric login, otherwise the app can incorrectly mark
