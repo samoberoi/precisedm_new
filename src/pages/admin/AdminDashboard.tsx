@@ -220,7 +220,14 @@ const AdminDashboard = () => {
       setTotal(data.total);
       setFormStats(data.formStats || {});
       setTotalSubmissions(data.totalSubmissions || 0);
-      if (data.subscriptionStats) setSubStats(data.subscriptionStats);
+      if (data.subscriptionStats) {
+        setSubStats((prev) => ({
+          ...prev,
+          ...data.subscriptionStats,
+          renewals30: data.subscriptionStats.renewals30 ?? [],
+          expiredSubs: data.subscriptionStats.expiredSubs ?? [],
+        }));
+      }
     } else {
       toast({ title: "Error", description: data.error, variant: "destructive" });
     }
