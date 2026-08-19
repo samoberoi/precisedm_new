@@ -532,7 +532,7 @@ const AdminDashboard = () => {
                       </DialogTrigger>
                       <DialogContent className="mx-4 rounded-2xl">
                         <DialogHeader><DialogTitle>Add New User</DialogTitle></DialogHeader>
-                        <CreateUserForm />
+                        {CreateUserForm()}
                       </DialogContent>
                     </Dialog>
                   </div>
@@ -792,7 +792,7 @@ const AdminDashboard = () => {
                   </DialogTrigger>
                   <DialogContent className="mx-4 rounded-2xl">
                     <DialogHeader><DialogTitle>Add New User</DialogTitle></DialogHeader>
-                    <CreateUserForm />
+                    {CreateUserForm()}
                   </DialogContent>
                 </Dialog>
               </div>
