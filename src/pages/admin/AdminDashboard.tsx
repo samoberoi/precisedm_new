@@ -190,6 +190,11 @@ const AdminDashboard = () => {
     monthly: 0,
     yearly: 0,
     upcomingRenewals: [],
+    renewals30: [],
+    renewalsNext7: 0,
+    renewalsNext30: 0,
+    expired: 0,
+    expiredSubs: [],
   });
 
   const getAuthHeaders = async () => {
