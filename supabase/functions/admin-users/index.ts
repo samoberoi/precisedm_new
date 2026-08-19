@@ -117,11 +117,14 @@ Deno.serve(async (req) => {
         );
       }
 
-      // Default: list users
-      const { data: usersData } = await supabaseAdmin.auth.admin.listUsers({
-        page: 1,
-        perPage: 1000,
-      });
+      // Default: list users (paginate — listUsers caps per page)
+      const allAuthUsers: any[] = [];
+      for (let page = 1; page <= 40; page++) {
+        const { data: pageData } = await supabaseAdmin.auth.admin.listUsers({ page, perPage: 1000 });
+        const batch = pageData?.users || [];
+        allAuthUsers.push(...batch);
+        if (batch.length < 1000) break;
+      }
 
       const { data: profiles } = await supabaseAdmin
         .from("profiles")
@@ -135,9 +138,39 @@ Deno.serve(async (req) => {
         (roles || []).filter((r: any) => r.role === "admin").map((r: any) => r.user_id)
       );
 
-      const users = (usersData?.users || []).map((u: any) => {
+      // Get subscriptions up-front so each user row can carry its plan dates
+      const { data: allSubs } = await supabaseAdmin
+        .from("subscriptions")
+        .select("*");
+
+      const now = new Date();
+      const DAY = 24 * 60 * 60 * 1000;
+
+      // Most relevant subscription per user: active & not expired wins, then latest created
+      const rank = (s: any) => {
+        const notExpired = !s.next_billing_date || new Date(s.next_billing_date) > now;
+        if (s.status === "active" && notExpired) return 3;
+        if (s.status === "active") return 2;
+        return 1;
+      };
+      const bestPerUser = new Map<string, any>();
+      for (const s of allSubs || []) {
+        const existing = bestPerUser.get(s.user_id);
+        if (
+          !existing ||
+          rank(s) > rank(existing) ||
+          (rank(s) === rank(existing) && new Date(s.created_at) > new Date(existing.created_at))
+        ) {
+          bestPerUser.set(s.user_id, s);
+        }
+      }
+
+      const users = allAuthUsers.map((u: any) => {
         const profile = profiles?.find((p: any) => p.user_id === u.id);
         const isAdmin = adminUserIds.has(u.id);
+        const sub = bestPerUser.get(u.id) || null;
+        const renewal = sub?.next_billing_date ? new Date(sub.next_billing_date) : null;
+        const isCurrent = !!sub && sub.status === "active" && (!renewal || renewal > now);
         return {
           id: u.id,
           email: u.email,
@@ -146,6 +179,12 @@ Deno.serve(async (req) => {
           custom_user_id: profile?.custom_user_id || "",
           created_at: u.created_at,
           last_sign_in_at: u.last_sign_in_at,
+          plan_type: sub?.plan_type || null,
+          subscription_status: sub ? (isCurrent ? "active" : (renewal && renewal <= now ? "expired" : sub.status)) : "none",
+          start_date: sub?.start_date || null,
+          next_billing_date: sub?.next_billing_date || null,
+          days_remaining: renewal ? Math.ceil((renewal.getTime() - now.getTime()) / DAY) : null,
+          paypal_subscription_id: sub?.paypal_subscription_id || null,
         };
       });
 
@@ -159,42 +198,34 @@ Deno.serve(async (req) => {
         formStats[s.form_type] = (formStats[s.form_type] || 0) + 1;
       }
 
-      // Get subscription stats
-      const { data: allSubs } = await supabaseAdmin
-        .from("subscriptions")
-        .select("*");
-
-      const activeSubs = (allSubs || []).filter(
-        (s: any) => s.status === "active" && s.next_billing_date && new Date(s.next_billing_date) > new Date()
+      const uniqueActiveSubs = Array.from(bestPerUser.values()).filter(
+        (s: any) => s.status === "active" && s.next_billing_date && new Date(s.next_billing_date) > now
       );
-
-      // Deduplicate: keep only the latest subscription per user
-      const latestPerUser = new Map<string, any>();
-      for (const s of activeSubs) {
-        const existing = latestPerUser.get(s.user_id);
-        if (!existing || new Date(s.created_at) > new Date(existing.created_at)) {
-          latestPerUser.set(s.user_id, s);
-        }
-      }
-      const uniqueActiveSubs = Array.from(latestPerUser.values());
 
       const subscribedUserIds = new Set(uniqueActiveSubs.map((s: any) => s.user_id));
       const monthlySubs = uniqueActiveSubs.filter((s: any) => s.plan_type === "monthly");
       const yearlySubs = uniqueActiveSubs.filter((s: any) => s.plan_type === "yearly");
 
-      const now = new Date();
-      const fifteenDaysLater = new Date(now.getTime() + 15 * 24 * 60 * 60 * 1000);
-      const upcomingRenewals = uniqueActiveSubs
-        .filter((s: any) => new Date(s.next_billing_date) <= fifteenDaysLater)
-        .map((s: any) => {
-          const profile = profiles?.find((p: any) => p.user_id === s.user_id);
-          return {
-            ...s,
-            user_name: profile?.full_name || "Unknown",
-            user_email: profile?.email || "",
-          };
-        })
-        .sort((a: any, b: any) => new Date(a.next_billing_date).getTime() - new Date(b.next_billing_date).getTime());
+      const withProfile = (s: any) => {
+        const profile = profiles?.find((p: any) => p.user_id === s.user_id);
+        return {
+          ...s,
+          user_name: profile?.full_name || profile?.email || "Unknown",
+          user_email: profile?.email || "",
+        };
+      };
+      const byDate = (a: any, b: any) =>
+        new Date(a.next_billing_date).getTime() - new Date(b.next_billing_date).getTime();
+
+      const inDays = (n: number) =>
+        uniqueActiveSubs.filter((s: any) => new Date(s.next_billing_date) <= new Date(now.getTime() + n * DAY));
+
+      const upcomingRenewals = inDays(15).map(withProfile).sort(byDate);
+      const renewals30 = inDays(30).map(withProfile).sort(byDate);
+      const expiredSubs = Array.from(bestPerUser.values())
+        .filter((s: any) => s.next_billing_date && new Date(s.next_billing_date) <= now)
+        .map(withProfile)
+        .sort((a: any, b: any) => new Date(b.next_billing_date).getTime() - new Date(a.next_billing_date).getTime());
 
       return new Response(
         JSON.stringify({ 
