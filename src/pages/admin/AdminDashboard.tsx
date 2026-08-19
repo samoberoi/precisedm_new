@@ -405,8 +405,8 @@ const AdminDashboard = () => {
         <Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="user@example.com" className="h-11 rounded-xl bg-muted/40" />
       </div>
       <div className="space-y-1.5">
-        <Label>Password *</Label>
-        <Input type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="Min. 8 characters" className="h-11 rounded-xl bg-muted/40" />
+        <Label>Password (optional)</Label>
+        <Input type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="Leave blank — users sign in with an email OTP" className="h-11 rounded-xl bg-muted/40" />
       </div>
       <div className="space-y-1.5">
         <Label>User Type</Label>
@@ -420,9 +420,40 @@ const AdminDashboard = () => {
         </Select>
       </div>
       <div className="space-y-1.5">
+        <Label>Coupon (optional)</Label>
+        <Select value={form.coupon_code} onValueChange={(v) => setForm({ ...form, coupon_code: v })}>
+          <SelectTrigger className="h-11 rounded-xl bg-muted/40"><SelectValue placeholder="No coupon" /></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="none">No coupon — regular account</SelectItem>
+            {availableCoupons
+              .filter((c) => c.active && c.times_redeemed < c.max_redemptions && (!c.expires_at || new Date(c.expires_at) > new Date()))
+              .map((c) => (
+                <SelectItem key={c.id} value={c.code}>
+                  {c.code} — {c.kind === "free_access"
+                    ? `${c.duration_months} month${c.duration_months > 1 ? "s" : ""} free`
+                    : `${c.percent_off}% off`}
+                </SelectItem>
+              ))}
+          </SelectContent>
+        </Select>
+        <p className="text-[11px] text-muted-foreground">
+          Free-access coupons are applied instantly — the user signs in with no payment prompt.
+        </p>
+      </div>
+      <label className="flex items-center gap-3 rounded-xl bg-muted/40 p-3 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={form.send_invite}
+          onChange={(e) => setForm({ ...form, send_invite: e.target.checked })}
+          className="h-4 w-4 accent-primary"
+        />
+        <span className="text-sm font-medium text-foreground">Email them an invitation</span>
+      </label>
+      <div className="space-y-1.5">
         <Label>User ID (optional)</Label>
         <Input value={form.custom_user_id} onChange={(e) => setForm({ ...form, custom_user_id: e.target.value })} placeholder="Hospital / Student ID" className="h-11 rounded-xl bg-muted/40" />
       </div>
+
       <Button type="submit" disabled={creating} className="w-full h-11 rounded-xl font-semibold gradient-primary text-primary-foreground">
         {creating ? "Creating..." : "Create User"}
       </Button>
