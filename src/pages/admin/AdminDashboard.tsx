@@ -57,6 +57,12 @@ interface UserRow {
   custom_user_id: string;
   created_at: string;
   last_sign_in_at: string | null;
+  plan_type: string | null;
+  subscription_status: string;
+  start_date: string | null;
+  next_billing_date: string | null;
+  days_remaining: number | null;
+  paypal_subscription_id: string | null;
 }
 
 interface SubmissionRow {
@@ -68,6 +74,7 @@ interface SubmissionRow {
 }
 
 interface UpcomingRenewal {
+  start_date?: string | null;
   id: string;
   user_id: string;
   plan_type: string;
@@ -97,6 +104,11 @@ interface SubscriptionStats {
   monthly: number;
   yearly: number;
   upcomingRenewals: UpcomingRenewal[];
+  renewals30: UpcomingRenewal[];
+  renewalsNext7: number;
+  renewalsNext30: number;
+  expired: number;
+  expiredSubs: UpcomingRenewal[];
 }
 
 type ViewMode = "dashboard" | "users" | "submissions" | "subscriptions" | "subscription-detail";
@@ -154,6 +166,7 @@ const AdminDashboard = () => {
   const [subCustomEndDate, setSubCustomEndDate] = useState("");
 
   const [userSearchQuery, setUserSearchQuery] = useState("");
+  const [userPlanFilter, setUserPlanFilter] = useState<"all" | "active" | "renewing" | "expired" | "none">("all");
   const [userDateFilter, setUserDateFilter] = useState<"all_time" | "today" | "yesterday" | "this_week" | "this_month" | "custom">("all_time");
   const [userCustomStartDate, setUserCustomStartDate] = useState("");
   const [userCustomEndDate, setUserCustomEndDate] = useState("");
@@ -179,6 +192,11 @@ const AdminDashboard = () => {
     monthly: 0,
     yearly: 0,
     upcomingRenewals: [],
+    renewals30: [],
+    renewalsNext7: 0,
+    renewalsNext30: 0,
+    expired: 0,
+    expiredSubs: [],
   });
 
   const getAuthHeaders = async () => {
@@ -204,7 +222,14 @@ const AdminDashboard = () => {
       setTotal(data.total);
       setFormStats(data.formStats || {});
       setTotalSubmissions(data.totalSubmissions || 0);
-      if (data.subscriptionStats) setSubStats(data.subscriptionStats);
+      if (data.subscriptionStats) {
+        setSubStats((prev) => ({
+          ...prev,
+          ...data.subscriptionStats,
+          renewals30: data.subscriptionStats.renewals30 ?? [],
+          expiredSubs: data.subscriptionStats.expiredSubs ?? [],
+        }));
+      }
     } else {
       toast({ title: "Error", description: data.error, variant: "destructive" });
     }
@@ -319,9 +344,24 @@ const AdminDashboard = () => {
     return users.filter((u) => {
       const inDate = range ? (() => { const d = new Date(u.created_at); return d >= range.start && d < range.end; })() : true;
       const inSearch = !userSearchQuery || `${u.full_name} ${u.email}`.toLowerCase().includes(userSearchQuery.toLowerCase());
-      return inDate && inSearch;
+      const d = u.days_remaining;
+      const inPlan =
+        userPlanFilter === "all" ? true :
+        userPlanFilter === "active" ? u.subscription_status === "active" :
+        userPlanFilter === "renewing" ? u.subscription_status === "active" && d !== null && d <= 30 :
+        userPlanFilter === "expired" ? u.subscription_status === "expired" :
+        userPlanFilter === "none" ? u.subscription_status === "none" : true;
+      return inDate && inSearch && inPlan;
     });
-  }, [users, userDateFilter, userSearchQuery, userCustomStartDate, userCustomEndDate]);
+  }, [users, userDateFilter, userSearchQuery, userCustomStartDate, userCustomEndDate, userPlanFilter]);
+
+  const userPlanCounts = useMemo(() => ({
+    all: users.length,
+    active: users.filter((u) => u.subscription_status === "active").length,
+    renewing: users.filter((u) => u.subscription_status === "active" && u.days_remaining !== null && u.days_remaining <= 30).length,
+    expired: users.filter((u) => u.subscription_status === "expired").length,
+    none: users.filter((u) => u.subscription_status === "none").length,
+  }), [users]);
 
   const firstName = user?.user_metadata?.full_name?.split(" ")[0] || "Admin";
 
@@ -610,6 +650,22 @@ const AdminDashboard = () => {
                   </motion.button>
                 </div>
 
+                {/* Renewal pulse */}
+                <div className="grid grid-cols-3 gap-3 mt-3">
+                  <div className="rounded-2xl bg-card border border-border shadow-sm p-4">
+                    <p className="text-[10px] font-semibold text-muted-foreground mb-1">Renews ≤ 7d</p>
+                    <p className="text-2xl font-black text-amber-600">{subStats.renewalsNext7}</p>
+                  </div>
+                  <div className="rounded-2xl bg-card border border-border shadow-sm p-4">
+                    <p className="text-[10px] font-semibold text-muted-foreground mb-1">Renews ≤ 30d</p>
+                    <p className="text-2xl font-black text-primary">{subStats.renewalsNext30}</p>
+                  </div>
+                  <div className="rounded-2xl bg-card border border-border shadow-sm p-4">
+                    <p className="text-[10px] font-semibold text-muted-foreground mb-1">Expired</p>
+                    <p className="text-2xl font-black text-destructive">{subStats.expired}</p>
+                  </div>
+                </div>
+
                 {/* Upcoming Renewals */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
@@ -618,11 +674,11 @@ const AdminDashboard = () => {
                   <div className="flex items-center gap-2 mb-3">
                     <Clock className="h-4 w-4 text-primary" />
                     <h3 className="text-sm font-bold text-foreground">Upcoming Renewals</h3>
-                    <span className="text-[10px] font-semibold bg-primary/10 text-primary px-2 py-0.5 rounded-full">Next 15 Days</span>
+                    <span className="text-[10px] font-semibold bg-primary/10 text-primary px-2 py-0.5 rounded-full">Next 30 Days</span>
                   </div>
-                  {subStats.upcomingRenewals.length > 0 ? (
+                  {subStats.renewals30.length > 0 ? (
                     <div className="space-y-2">
-                      {subStats.upcomingRenewals.map((r) => {
+                      {subStats.renewals30.map((r) => {
                         const daysLeft = Math.max(0, Math.ceil((new Date(r.next_billing_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
                         return (
                           <div key={r.id} className="flex items-center gap-3 rounded-xl bg-muted/30 p-3">
@@ -632,10 +688,13 @@ const AdminDashboard = () => {
                             <div className="flex-1 min-w-0">
                               <p className="text-sm font-semibold text-foreground truncate">{r.user_name}</p>
                               <p className="text-xs text-muted-foreground truncate">{r.user_email}</p>
+                              <p className="text-[10px] text-muted-foreground mt-0.5">
+                                Started {r.start_date ? new Date(r.start_date).toLocaleDateString() : "—"} · Renews {new Date(r.next_billing_date).toLocaleDateString()}
+                              </p>
                             </div>
                             <div className="text-right shrink-0">
-                              <p className={`text-sm font-black ${daysLeft <= 3 ? "text-destructive" : "text-foreground"}`}>{daysLeft}d</p>
-                              <p className="text-[10px] text-muted-foreground">{r.plan_type}</p>
+                              <p className={`text-sm font-black ${daysLeft <= 3 ? "text-destructive" : daysLeft <= 7 ? "text-amber-600" : "text-foreground"}`}>{daysLeft}d</p>
+                              <p className="text-[10px] text-muted-foreground capitalize">{r.plan_type}</p>
                             </div>
                           </div>
                         );
@@ -644,7 +703,7 @@ const AdminDashboard = () => {
                   ) : (
                     <div className="text-center py-4">
                       <CheckCircle2 className="h-8 w-8 text-primary/30 mx-auto mb-2" />
-                      <p className="text-sm text-muted-foreground">No renewals in the next 15 days</p>
+                      <p className="text-sm text-muted-foreground">No renewals in the next 30 days</p>
                     </div>
                   )}
                 </motion.div>
@@ -678,6 +737,37 @@ const AdminDashboard = () => {
                 </Dialog>
               </div>
 
+              {/* Package summary */}
+              <div className="grid grid-cols-4 gap-2 mb-4">
+                {([
+                  { key: "all", label: "Users", value: userPlanCounts.all, tone: "text-foreground" },
+                  { key: "active", label: "On Package", value: userPlanCounts.active, tone: "text-primary" },
+                  { key: "renewing", label: "Renew ≤30d", value: userPlanCounts.renewing, tone: "text-amber-600" },
+                  { key: "expired", label: "Expired", value: userPlanCounts.expired, tone: "text-destructive" },
+                ] as const).map((c) => (
+                  <button key={c.key} onClick={() => setUserPlanFilter(c.key)}
+                    className={`rounded-2xl border p-3 text-left transition-all active:scale-[0.97] ${
+                      userPlanFilter === c.key ? "border-primary bg-primary/5" : "border-border bg-card"
+                    }`}
+                  >
+                    <p className={`text-xl font-black ${c.tone}`}>{loading ? "—" : c.value}</p>
+                    <p className="text-[10px] font-semibold text-muted-foreground leading-tight mt-0.5">{c.label}</p>
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex gap-2 mb-3 overflow-x-auto pb-1 -mx-1 px-1">
+                {(["all", "active", "renewing", "expired", "none"] as const).map((f) => (
+                  <button key={f} onClick={() => setUserPlanFilter(f)}
+                    className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all whitespace-nowrap ${
+                      userPlanFilter === f ? "gradient-primary text-primary-foreground border-transparent" : "border-border bg-card text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {f === "all" ? "All" : f === "none" ? "No Package" : f === "renewing" ? "Renewing Soon" : f.charAt(0).toUpperCase() + f.slice(1)}
+                  </button>
+                ))}
+              </div>
+
               <FilterBar
                 dateFilter={userDateFilter} onDateFilterChange={(v) => setUserDateFilter(v)}
                 searchQuery={userSearchQuery} onSearchChange={setUserSearchQuery}
@@ -688,22 +778,64 @@ const AdminDashboard = () => {
 
               {loading ? <LoadingSpinner /> : (
                 <div className="space-y-2">
-                  {filteredUsers.map((u, i) => (
-                    <motion.div key={u.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}
-                      className="rounded-2xl bg-card border border-border shadow-sm p-3 flex items-center gap-3"
-                    >
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full gradient-primary text-primary-foreground font-bold text-sm shrink-0">
-                        {(u.full_name || u.email).charAt(0).toUpperCase()}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-foreground truncate">{u.full_name || "—"}</p>
-                        <p className="text-xs text-muted-foreground truncate">{u.email}</p>
-                      </div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary px-2 py-1 rounded-full shrink-0 capitalize">
-                        {u.user_type}
-                      </span>
-                    </motion.div>
-                  ))}
+                  {filteredUsers.map((u, i) => {
+                    const d = u.days_remaining;
+                    const statusTone =
+                      u.subscription_status === "active"
+                        ? (d !== null && d <= 7 ? "bg-amber-500/10 text-amber-600" : "bg-primary/10 text-primary")
+                        : u.subscription_status === "expired"
+                        ? "bg-destructive/10 text-destructive"
+                        : "bg-muted text-muted-foreground";
+                    const statusLabel =
+                      u.subscription_status === "active" ? (u.plan_type || "active")
+                      : u.subscription_status === "expired" ? "Expired"
+                      : u.subscription_status === "none" ? "No package"
+                      : u.subscription_status;
+                    return (
+                      <motion.div key={u.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: Math.min(i, 15) * 0.03 }}
+                        className="rounded-2xl bg-card border border-border shadow-sm p-3"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-full gradient-primary text-primary-foreground font-bold text-sm shrink-0">
+                            {(u.full_name || u.email).charAt(0).toUpperCase()}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-foreground truncate">{u.full_name || "—"}</p>
+                            <p className="text-xs text-muted-foreground truncate">{u.email}</p>
+                          </div>
+                          <div className="flex flex-col items-end gap-1 shrink-0">
+                            <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full capitalize ${statusTone}`}>
+                              {statusLabel}
+                            </span>
+                            <span className="text-[10px] text-muted-foreground capitalize">{u.user_type}</span>
+                          </div>
+                        </div>
+
+                        <div className="mt-2.5 grid grid-cols-3 gap-2 rounded-xl bg-muted/30 px-3 py-2">
+                          <div>
+                            <p className="text-[9px] uppercase tracking-wider text-muted-foreground font-semibold">Started</p>
+                            <p className="text-[11px] font-semibold text-foreground">
+                              {u.start_date ? new Date(u.start_date).toLocaleDateString() : "—"}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-[9px] uppercase tracking-wider text-muted-foreground font-semibold">
+                              {u.subscription_status === "expired" ? "Ended" : "Renews"}
+                            </p>
+                            <p className="text-[11px] font-semibold text-foreground">
+                              {u.next_billing_date ? new Date(u.next_billing_date).toLocaleDateString() : "—"}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-[9px] uppercase tracking-wider text-muted-foreground font-semibold">Days Left</p>
+                            <p className={`text-[11px] font-bold ${d === null ? "text-muted-foreground" : d <= 0 ? "text-destructive" : d <= 7 ? "text-amber-600" : "text-foreground"}`}>
+                              {d === null ? "—" : d <= 0 ? "Expired" : `${d}d`}
+                            </p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
                   {filteredUsers.length === 0 && <EmptyState message="No users found for this filter" />}
                 </div>
               )}
