@@ -103,6 +103,11 @@ interface SubscriptionStats {
   monthly: number;
   yearly: number;
   upcomingRenewals: UpcomingRenewal[];
+  renewals30: UpcomingRenewal[];
+  renewalsNext7: number;
+  renewalsNext30: number;
+  expired: number;
+  expiredSubs: UpcomingRenewal[];
 }
 
 type ViewMode = "dashboard" | "users" | "submissions" | "subscriptions" | "subscription-detail";
