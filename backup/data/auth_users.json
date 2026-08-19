@@ -1,0 +1,1298 @@
+[
+ {
+  "id": "5eec1106-416a-42dc-bca1-c9f6a99139b2",
+  "email": "neerajkainth@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-16T02:31:47.529454+00:00",
+  "updated_at": "2026-06-04T09:33:13.829101+00:00",
+  "email_confirmed_at": "2026-03-16T02:32:09.122548+00:00",
+  "last_sign_in_at": "2026-06-04T09:33:13.807579+00:00",
+  "raw_user_meta_data": {
+   "sub": "5eec1106-416a-42dc-bca1-c9f6a99139b2",
+   "email": "neerajkainth@gmail.com",
+   "full_name": "neeraj kainth",
+   "user_type": "student",
+   "accepted_terms": true,
+   "custom_user_id": "ABC",
+   "email_verified": true,
+   "phone_verified": false
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "61bc3c74-5afd-42da-8005-f3be19f39055",
+  "email": "admin@precisedm.com",
+  "phone": null,
+  "created_at": "2026-03-16T02:34:57.732843+00:00",
+  "updated_at": "2026-07-29T06:48:48.14797+00:00",
+  "email_confirmed_at": "2026-03-16T02:34:57.76702+00:00",
+  "last_sign_in_at": "2026-07-09T07:38:33.690341+00:00",
+  "raw_user_meta_data": {
+   "full_name": "PreciseDM Admin",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "35ce2b86-6263-453c-8b3c-a299e7890405",
+  "email": "alejandrocastanondiaz@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T17:58:06.225559+00:00",
+  "updated_at": "2026-03-20T17:58:06.256387+00:00",
+  "email_confirmed_at": "2026-03-20T17:58:06.253981+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Alejandro Castanon Diaz",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "70de2169-b9ca-4566-b538-98a8c4332565",
+  "email": "daren@dhoray.com",
+  "phone": null,
+  "created_at": "2026-03-20T17:58:07.27241+00:00",
+  "updated_at": "2026-08-08T14:23:40.490863+00:00",
+  "email_confirmed_at": "2026-03-20T17:58:07.277625+00:00",
+  "last_sign_in_at": "2026-08-08T14:23:40.464679+00:00",
+  "raw_user_meta_data": {
+   "full_name": "Daren Dhoray",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "559989c5-e4a6-48d4-a2e2-001de30c675a",
+  "email": "kohlhosein@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T17:58:08.196236+00:00",
+  "updated_at": "2026-03-20T17:58:08.217789+00:00",
+  "email_confirmed_at": "2026-03-20T17:58:08.208668+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Kohl Hosein",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "242533cb-7c12-49a5-8d0e-ce43783c63e5",
+  "email": "mcwilliams.amber2@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:08.687249+00:00",
+  "updated_at": "2026-05-14T19:53:42.656833+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:08.717679+00:00",
+  "last_sign_in_at": "2026-05-14T19:53:42.609395+00:00",
+  "raw_user_meta_data": {
+   "full_name": "Mcwilliams Amber",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "11f6b50b-5323-4b4c-afbb-ffd025507d2b",
+  "email": "cherinetn@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:09.245704+00:00",
+  "updated_at": "2026-07-17T19:46:36.464563+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:09.252116+00:00",
+  "last_sign_in_at": "2026-05-04T15:39:48.594713+00:00",
+  "raw_user_meta_data": {
+   "full_name": "Cherinetn",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "db1420c2-8d54-4d4a-8308-d1fa03c306cf",
+  "email": "crhsu8@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:09.750814+00:00",
+  "updated_at": "2026-03-20T18:12:09.757169+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:09.756116+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Crhsu",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "d504839d-6fdc-4de9-92f1-78b5f8314700",
+  "email": "colleencook1000@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:10.318948+00:00",
+  "updated_at": "2026-08-19T16:48:18.185995+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:10.322359+00:00",
+  "last_sign_in_at": "2026-08-19T14:43:42.650016+00:00",
+  "raw_user_meta_data": {
+   "full_name": "Colleencook",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "64546a84-4098-468f-8064-943ce7b4fb0d",
+  "email": "dsebrin1@live.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:10.835279+00:00",
+  "updated_at": "2026-03-20T18:12:10.841197+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:10.839157+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Dsebrin",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "2c96150d-307d-4a9d-a51b-a962f4a29180",
+  "email": "jkriz1@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:11.343918+00:00",
+  "updated_at": "2026-03-20T18:12:11.350615+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:11.349232+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Jkriz",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "9996ac2e-8e62-4767-826b-60afc92a5358",
+  "email": "joseph.kriz@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:11.846823+00:00",
+  "updated_at": "2026-03-20T18:12:11.851497+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:11.850898+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Joseph Kriz",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "1bc7a201-1f21-499c-9977-a33d42f19df6",
+  "email": "kthriftaprn@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:12.356528+00:00",
+  "updated_at": "2026-06-25T14:03:40.637222+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:12.359777+00:00",
+  "last_sign_in_at": "2026-06-25T14:03:40.611168+00:00",
+  "raw_user_meta_data": {
+   "full_name": "Kthriftaprn",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "d9e7f2d3-51a4-4e9c-b781-e4cfd40cd4b4",
+  "email": "kenzienest18@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:12.85317+00:00",
+  "updated_at": "2026-03-20T18:12:12.857395+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:12.856697+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Kenzienest",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "30138a21-2ccc-4134-8dd5-ffb9029e5406",
+  "email": "karl.parens@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:13.382857+00:00",
+  "updated_at": "2026-06-14T20:01:29.757152+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:13.385848+00:00",
+  "last_sign_in_at": "2026-06-14T18:46:26.952768+00:00",
+  "raw_user_meta_data": {
+   "full_name": "Karl Parens",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "bb250599-4db2-4c63-8393-f1720bd2fa0c",
+  "email": "metcaps@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:13.89105+00:00",
+  "updated_at": "2026-03-20T18:12:13.894401+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:13.893793+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Metcaps",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "4005c71e-04ea-4add-ac7f-cbf7ed0cead2",
+  "email": "mary-lou.chung@tatil.co.tt",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:14.393164+00:00",
+  "updated_at": "2026-03-20T18:12:14.396323+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:14.395651+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Mary-lou Chung",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "e4c1b7cc-2216-4fa1-bd29-94113a4f9880",
+  "email": "seniorrxllc@icloud.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:14.900402+00:00",
+  "updated_at": "2026-03-28T14:43:25.538493+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:14.90288+00:00",
+  "last_sign_in_at": "2026-03-28T14:43:25.491576+00:00",
+  "raw_user_meta_data": {
+   "full_name": "Seniorrxllc",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "2fb7e0e9-3fd5-4e07-a8f3-4afc8115f8c1",
+  "email": "colleencook@precisedm.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:15.388586+00:00",
+  "updated_at": "2026-03-20T18:12:15.392592+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:15.391589+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Colleencook",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "a1a6c236-31dc-4a96-8509-e9f4da713601",
+  "email": "stfaust@me.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:15.879685+00:00",
+  "updated_at": "2026-03-20T18:12:15.883862+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:15.883283+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Stfaust",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "fa5947fa-b4d3-4d61-b7f0-eedccf6ee438",
+  "email": "suzancchung@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:16.362866+00:00",
+  "updated_at": "2026-03-20T18:12:16.366048+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:16.365397+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Suzancchung",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "0a20cb59-2a4b-4b63-855a-e640315fe752",
+  "email": "tedlakes@aol.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:16.879422+00:00",
+  "updated_at": "2026-03-20T18:12:16.882825+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:16.881903+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Tedlakes",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "e2720e4c-b9f9-420e-9b12-46a68a4a469b",
+  "email": "victoria.dubose@yahoo.com",
+  "phone": null,
+  "created_at": "2026-03-20T18:12:17.38675+00:00",
+  "updated_at": "2026-03-20T18:12:17.390064+00:00",
+  "email_confirmed_at": "2026-03-20T18:12:17.389379+00:00",
+  "last_sign_in_at": null,
+  "raw_user_meta_data": {
+   "full_name": "Victoria Dubose",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "bdb24016-8d10-4461-aca0-3d2552592191",
+  "email": "mail2anish.kk@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-21T17:40:18.940728+00:00",
+  "updated_at": "2026-03-23T18:07:01.613034+00:00",
+  "email_confirmed_at": "2026-03-21T17:40:18.99547+00:00",
+  "last_sign_in_at": "2026-03-22T09:15:08.52818+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "88e3544b-9f97-4a38-bc79-b1c679253b04",
+  "email": "callcook@hotmail.com",
+  "phone": null,
+  "created_at": "2026-03-22T13:10:42.978968+00:00",
+  "updated_at": "2026-08-08T14:07:12.720418+00:00",
+  "email_confirmed_at": "2026-03-22T13:10:43.025343+00:00",
+  "last_sign_in_at": "2026-06-25T18:37:00.419918+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "900758c4-1bf5-4a59-a205-b4c85eb93fc0",
+  "email": "sharma.meenakshi53@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-23T05:56:06.711527+00:00",
+  "updated_at": "2026-03-23T13:44:37.778065+00:00",
+  "email_confirmed_at": "2026-03-23T05:56:06.740456+00:00",
+  "last_sign_in_at": "2026-03-23T05:56:07.108821+00:00",
+  "raw_user_meta_data": {
+   "full_name": "Meenakshi",
+   "user_type": "student",
+   "accepted_terms": true,
+   "custom_user_id": "Abc",
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "0b55ef24-6895-4d2d-8013-576b41b08586",
+  "email": "shebamohammid@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-25T02:23:47.01416+00:00",
+  "updated_at": "2026-03-27T16:26:54.899735+00:00",
+  "email_confirmed_at": "2026-03-25T02:23:47.089883+00:00",
+  "last_sign_in_at": "2026-03-27T16:26:54.894475+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "33d52aa3-1e7c-4208-9f8e-d2e9da98a58a",
+  "email": "demo@precisedm.com",
+  "phone": null,
+  "created_at": "2026-03-25T10:26:46.720642+00:00",
+  "updated_at": "2026-03-25T11:03:46.981858+00:00",
+  "email_confirmed_at": "2026-03-25T10:26:46.754944+00:00",
+  "last_sign_in_at": "2026-03-25T11:03:46.965634+00:00",
+  "raw_user_meta_data": {
+   "full_name": "Apple Reviewer",
+   "user_type": "practitioner",
+   "accepted_terms": true,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "2a7ab52f-f6a0-436f-9753-5e20d410275e",
+  "email": "grimbergdaniel@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-25T16:48:44.154266+00:00",
+  "updated_at": "2026-05-31T17:09:08.088063+00:00",
+  "email_confirmed_at": "2026-03-25T16:48:44.220985+00:00",
+  "last_sign_in_at": "2026-05-31T17:09:08.064995+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "38637e0a-d666-4312-a759-1275f5643fb0",
+  "email": "van@hyperrevamp.com",
+  "phone": null,
+  "created_at": "2026-03-26T02:32:38.651936+00:00",
+  "updated_at": "2026-03-31T01:00:24.449845+00:00",
+  "email_confirmed_at": "2026-03-26T02:32:38.700729+00:00",
+  "last_sign_in_at": "2026-03-31T01:00:24.425438+00:00",
+  "raw_user_meta_data": {
+   "full_name": "Van",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "c4eb6080-1d3f-4cde-a5ae-5dda0699827d",
+  "email": "amandalstanhope@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-26T22:56:24.462702+00:00",
+  "updated_at": "2026-07-18T11:26:25.364324+00:00",
+  "email_confirmed_at": "2026-03-26T22:56:24.518272+00:00",
+  "last_sign_in_at": "2026-04-16T02:48:25.480664+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "ba514ad3-a3c7-4483-8345-eaa052d83385",
+  "email": "pepeleo@yahoo.com",
+  "phone": null,
+  "created_at": "2026-03-28T22:04:11.147798+00:00",
+  "updated_at": "2026-08-13T20:30:35.145282+00:00",
+  "email_confirmed_at": "2026-03-28T22:04:11.206626+00:00",
+  "last_sign_in_at": "2026-08-08T02:02:07.470415+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "944b16d7-f85d-4f37-9c80-314a498d3023",
+  "email": "raxkhan@yahoo.com",
+  "phone": null,
+  "created_at": "2026-03-30T19:54:26.193811+00:00",
+  "updated_at": "2026-07-31T04:24:41.080305+00:00",
+  "email_confirmed_at": "2026-03-30T19:54:26.247416+00:00",
+  "last_sign_in_at": "2026-07-30T15:29:16.740299+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "5ae28ab9-138b-44ac-850b-9555522bd26e",
+  "email": "richarddalynp@gmail.com",
+  "phone": null,
+  "created_at": "2026-03-30T20:39:39.725541+00:00",
+  "updated_at": "2026-03-30T20:39:40.934863+00:00",
+  "email_confirmed_at": "2026-03-30T20:39:39.765586+00:00",
+  "last_sign_in_at": "2026-03-30T20:39:40.910146+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "fcc38370-d404-4dae-a7ef-e84de5a24c95",
+  "email": "neeraj@hyperrevamp.com",
+  "phone": null,
+  "created_at": "2026-03-31T17:44:23.483617+00:00",
+  "updated_at": "2026-08-19T17:01:06.117754+00:00",
+  "email_confirmed_at": "2026-03-31T17:44:23.595584+00:00",
+  "last_sign_in_at": "2026-08-19T17:01:06.082185+00:00",
+  "raw_user_meta_data": {
+   "full_name": "NK",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "69496443-1f58-4576-bcf1-9a270c46ba62",
+  "email": "jmlarson25@gmail.com",
+  "phone": null,
+  "created_at": "2026-04-01T20:41:55.397408+00:00",
+  "updated_at": "2026-04-01T20:41:56.98279+00:00",
+  "email_confirmed_at": "2026-04-01T20:41:55.456599+00:00",
+  "last_sign_in_at": "2026-04-01T20:41:56.932075+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "ed1517a4-2eb4-4aa9-8f8e-f4ed08e2d5dc",
+  "email": "howlaw53@gmail.com",
+  "phone": null,
+  "created_at": "2026-04-07T00:36:56.819869+00:00",
+  "updated_at": "2026-07-30T14:35:14.735164+00:00",
+  "email_confirmed_at": "2026-04-07T00:36:56.87639+00:00",
+  "last_sign_in_at": "2026-04-07T00:36:58.026255+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "6013745d-1589-4611-ac8e-7a0de8925d0b",
+  "email": "osiemo83@gmail.com",
+  "phone": null,
+  "created_at": "2026-04-08T15:44:54.316106+00:00",
+  "updated_at": "2026-04-29T19:34:47.960914+00:00",
+  "email_confirmed_at": "2026-04-08T15:44:54.40368+00:00",
+  "last_sign_in_at": "2026-04-08T15:44:55.561778+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "304df538-d9fa-4acd-a57b-8e72d3b28bd4",
+  "email": "rubes921@gmail.com",
+  "phone": null,
+  "created_at": "2026-04-23T03:05:12.855817+00:00",
+  "updated_at": "2026-04-23T03:05:14.628291+00:00",
+  "email_confirmed_at": "2026-04-23T03:05:12.905822+00:00",
+  "last_sign_in_at": "2026-04-23T03:05:14.601593+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "a1cf89eb-1b0e-4027-812d-3db04a94138c",
+  "email": "neerajpc@gmail.com",
+  "phone": null,
+  "created_at": "2026-04-23T09:33:35.974447+00:00",
+  "updated_at": "2026-05-04T10:44:11.855743+00:00",
+  "email_confirmed_at": "2026-04-23T09:33:36.030369+00:00",
+  "last_sign_in_at": "2026-05-04T10:44:11.822448+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "53228afc-c5e6-454d-ba49-efe6c08509c8",
+  "email": "aggarwalayushi826@gmail.com",
+  "phone": null,
+  "created_at": "2026-04-27T04:44:46.108741+00:00",
+  "updated_at": "2026-05-20T18:56:22.06488+00:00",
+  "email_confirmed_at": "2026-04-27T04:44:46.185073+00:00",
+  "last_sign_in_at": "2026-05-20T16:33:43.687627+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "19736717-b877-4660-996f-0be503fccd9b",
+  "email": "harvey@hyperrevamp.com",
+  "phone": null,
+  "created_at": "2026-05-11T18:55:38.765423+00:00",
+  "updated_at": "2026-08-19T15:01:31.370756+00:00",
+  "email_confirmed_at": "2026-05-11T18:55:38.897834+00:00",
+  "last_sign_in_at": "2026-07-11T14:32:00.293887+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "69a2ef06-74d1-4bb4-ade0-111e1660721e",
+  "email": "shrruti@hyperrevamp.com",
+  "phone": null,
+  "created_at": "2026-05-21T05:10:37.70943+00:00",
+  "updated_at": "2026-05-21T06:01:48.491289+00:00",
+  "email_confirmed_at": "2026-05-21T05:10:37.752528+00:00",
+  "last_sign_in_at": "2026-05-21T06:01:48.466811+00:00",
+  "raw_user_meta_data": {
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "c7452262-95e5-452e-a24b-967015d55658",
+  "email": "sspuidk@gmail.com",
+  "phone": null,
+  "created_at": "2026-05-21T06:04:41.941231+00:00",
+  "updated_at": "2026-05-21T06:10:52.021366+00:00",
+  "email_confirmed_at": "2026-05-21T06:04:42.010152+00:00",
+  "last_sign_in_at": "2026-05-21T06:10:51.992685+00:00",
+  "raw_user_meta_data": {
+   "full_name": "A",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "f96fadd0-080f-4ced-814a-4140cc9a552e",
+  "email": "kairakainth@gmail.com",
+  "phone": null,
+  "created_at": "2026-06-14T14:58:43.36678+00:00",
+  "updated_at": "2026-06-14T15:07:21.602852+00:00",
+  "email_confirmed_at": "2026-06-14T14:58:43.406599+00:00",
+  "last_sign_in_at": "2026-06-14T15:07:21.580007+00:00",
+  "raw_user_meta_data": {
+   "college": null,
+   "full_name": "NK",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true,
+   "student_id_number": null
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "5462f8d4-f134-4f7a-8eb3-644a12395994",
+  "email": "hello@hyperrevamp.com",
+  "phone": null,
+  "created_at": "2026-06-14T15:07:57.886745+00:00",
+  "updated_at": "2026-06-23T18:59:46.023252+00:00",
+  "email_confirmed_at": "2026-06-14T15:07:57.989195+00:00",
+  "last_sign_in_at": "2026-06-14T15:13:11.302361+00:00",
+  "raw_user_meta_data": {
+   "college": null,
+   "full_name": "nk",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true,
+   "student_id_number": null
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "74e047ba-56ec-4493-98a1-cf9a634a22cc",
+  "email": "hranalyticsaccess@gmail.com",
+  "phone": null,
+  "created_at": "2026-07-08T12:53:49.098658+00:00",
+  "updated_at": "2026-07-08T12:53:49.962845+00:00",
+  "email_confirmed_at": "2026-07-08T12:53:49.175407+00:00",
+  "last_sign_in_at": "2026-07-08T12:53:49.940301+00:00",
+  "raw_user_meta_data": {
+   "college": null,
+   "full_name": "Harvey",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true,
+   "student_id_number": null
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "f228de31-7722-4671-941d-67be74112760",
+  "email": "jenlucia50@gmail.com",
+  "phone": null,
+  "created_at": "2026-07-27T23:42:46.253106+00:00",
+  "updated_at": "2026-07-27T23:42:47.604106+00:00",
+  "email_confirmed_at": "2026-07-27T23:42:46.323924+00:00",
+  "last_sign_in_at": "2026-07-27T23:42:47.576594+00:00",
+  "raw_user_meta_data": {
+   "college": null,
+   "full_name": "Jen Christiana",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true,
+   "student_id_number": null
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "d869597d-ab3e-4057-b25a-26ec61dc3a91",
+  "email": "pcneeraj81@gmail.com",
+  "phone": null,
+  "created_at": "2026-07-30T15:37:11.580618+00:00",
+  "updated_at": "2026-07-30T15:37:12.061143+00:00",
+  "email_confirmed_at": "2026-07-30T15:37:11.632958+00:00",
+  "last_sign_in_at": "2026-07-30T15:37:12.04082+00:00",
+  "raw_user_meta_data": {
+   "college": null,
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true,
+   "student_id_number": null
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "401fdf02-29f5-4f2e-909d-48616384007a",
+  "email": "ambrose513@hotmail.com",
+  "phone": null,
+  "created_at": "2026-07-30T17:52:39.291007+00:00",
+  "updated_at": "2026-08-03T17:17:46.751136+00:00",
+  "email_confirmed_at": "2026-07-30T17:52:39.335544+00:00",
+  "last_sign_in_at": "2026-07-30T17:52:41.255434+00:00",
+  "raw_user_meta_data": {
+   "college": null,
+   "full_name": "Amber Rose Stroud",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true,
+   "student_id_number": null
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "9a6b6b90-91aa-4b37-8f2c-2340a3896455",
+  "email": "daniel.cook67@gmail.com",
+  "phone": null,
+  "created_at": "2026-08-08T14:07:59.235282+00:00",
+  "updated_at": "2026-08-08T14:11:41.315713+00:00",
+  "email_confirmed_at": "2026-08-08T14:07:59.297812+00:00",
+  "last_sign_in_at": "2026-08-08T14:11:41.300175+00:00",
+  "raw_user_meta_data": {
+   "college": null,
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true,
+   "student_id_number": null
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ },
+ {
+  "id": "a7f41f5f-e444-4f50-8ddc-079aa5ff4d10",
+  "email": "daren@cybersafett.com",
+  "phone": null,
+  "created_at": "2026-08-08T14:24:39.833051+00:00",
+  "updated_at": "2026-08-08T14:24:41.162215+00:00",
+  "email_confirmed_at": "2026-08-08T14:24:39.95407+00:00",
+  "last_sign_in_at": "2026-08-08T14:24:41.142025+00:00",
+  "raw_user_meta_data": {
+   "college": null,
+   "full_name": "",
+   "user_type": "student",
+   "accepted_terms": false,
+   "custom_user_id": null,
+   "email_verified": true,
+   "student_id_number": null
+  },
+  "raw_app_meta_data": {
+   "provider": "email",
+   "providers": [
+    "email"
+   ]
+  },
+  "is_sso_user": false,
+  "role": "authenticated",
+  "aud": "authenticated"
+ }
+]
